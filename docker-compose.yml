@@ -1,0 +1,186 @@
+# 跨平台自动化项目 Docker Compose配置文件
+# 支持Windows、macOS、Linux的自动化框架
+
+version: "3.8"
+
+services:
+  # 主要的跨平台自动化服务
+  automation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: qq-shuihu-automation
+    restart: unless-stopped
+
+    # 挂载当前项目目录到容器，实现实时更新
+    volumes:
+      - .:/app
+      - automation_logs:/app/logs
+      - automation_screenshots:/app/screenshots
+      - automation_templates:/app/templates
+
+    # 跨平台环境变量配置
+    environment:
+      - PYTHONPATH=/app/src
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+      - MAX_WORKERS=4
+      - TASK_TIMEOUT=30
+      - DISPLAY=:99
+      - CROSS_PLATFORM=true
+
+    # 端口映射（如果需要Web界面或API）
+    ports:
+      - "8000:8000"
+
+    # 网络配置
+    networks:
+      - automation_network
+
+    # 健康检查
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import sys; sys.path.append('/app/src'); print('Container is healthy')",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+    # 资源限制
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2G
+        reservations:
+          cpus: "0.5"
+          memory: 512M
+
+    # 依赖服务（可选）
+    depends_on:
+      - redis
+
+    # 日志配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    # 启动命令（使用虚拟显示）
+    command:
+      ["/usr/local/bin/start-xvfb.sh", "python", "test_cross_platform.py"]
+
+  # Redis缓存服务（可选，用于任务队列或缓存）
+  redis:
+    image: redis:7-alpine
+    container_name: qq-shuihu-redis
+    restart: unless-stopped
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+    networks:
+      - automation_network
+
+    # Redis配置
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+  # 测试服务（用于验证跨平台功能）
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: qq-shuihu-test
+    restart: "no"
+
+    volumes:
+      - .:/app
+
+    environment:
+      - PYTHONPATH=/app/src
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=DEBUG
+      - DISPLAY=:99
+
+    networks:
+      - automation_network
+
+    # 运行测试
+    command:
+      ["/usr/local/bin/start-xvfb.sh", "python", "test_cross_platform.py"]
+
+    profiles:
+      - test
+
+# 网络配置
+networks:
+  automation_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# 数据卷配置
+volumes:
+  # 应用数据
+  automation_logs:
+    driver: local
+  automation_screenshots:
+    driver: local
+  automation_templates:
+    driver: local
+
+  # 数据库数据
+  redis_data:
+    driver: local
+
+# 开发环境配置
+# 使用: docker-compose -f docker-compose.yml -f docker-compose.override.yml up
+---
+# 开发环境覆盖配置
+version: "3.8"
+
+services:
+  automation:
+    # 开发环境变量
+    environment:
+      - PYTHONPATH=/app/src
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=DEBUG
+      - DEVELOPMENT=true
+      - DISPLAY=:99
+
+    # 开发时不限制资源
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 4G
+
+    # 开发模式命令（交互式）
+    command:
+      [
+        "/usr/local/bin/start-xvfb.sh",
+        "python",
+        "-c",
+        "print('开发环境已启动，请进入容器运行测试')",
+      ]
+
+    # 保持容器运行
+    stdin_open: true
+    tty: true
