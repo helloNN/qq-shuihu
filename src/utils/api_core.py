@@ -8,10 +8,10 @@ import time
 from typing import Optional, List, Dict, Any, Union
 
 try:
-    from .config import config, ExecutionMode, ClickMode, ImageMode
-    from .window_manager import CrossPlatformWindowManager, WindowInfo
-    from .automation import CrossPlatformAutomationEngine
-    from .task_system import (
+    from .config_manager import config, ExecutionMode, ClickMode, ImageMode
+    from .window_utils import CrossPlatformWindowManager, WindowInfo
+    from .automation_engine import CrossPlatformAutomationEngine
+    from .task_manager import (
         TaskManager,
         Task,
         TaskPriority,
@@ -23,10 +23,17 @@ try:
         task_manager,
     )
 except ImportError:
-    from config import config, ExecutionMode, ClickMode, ImageMode
-    from window_manager import CrossPlatformWindowManager, WindowInfo
-    from automation import CrossPlatformAutomationEngine
-    from task_system import (
+    # 如果相对导入失败，尝试绝对导入
+    import sys
+    import os
+
+    current_dir = os.path.dirname(__file__)
+    sys.path.insert(0, current_dir)
+
+    from config_manager import config, ExecutionMode, ClickMode, ImageMode
+    from window_utils import CrossPlatformWindowManager, WindowInfo
+    from automation_engine import CrossPlatformAutomationEngine
+    from task_manager import (
         TaskManager,
         Task,
         TaskPriority,

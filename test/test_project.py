@@ -7,8 +7,8 @@ import sys
 import os
 import traceback
 
-# 添加src目录到路径
-sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
+# 添加src目录到路径 - 从test目录访问上级目录的src
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), "src"))
 
 
 def test_imports():
@@ -16,40 +16,44 @@ def test_imports():
     print("=== 测试模块导入 ===")
 
     try:
-        # 测试配置模块
-        from config import config, ExecutionMode, ClickMode, ImageMode
+        # 测试utils模块导入
+        try:
+            from src.utils import (
+                AutomationAPI,
+                TaskPriority,
+                CrossPlatformAutomationEngine,
+                CrossPlatformWindowManager,
+                TaskManager,
+                BaseTask,
+                Task,
+                TaskResult,
+                ExecutionMode,
+                ClickMode,
+                ImageMode,
+                AutomationConfig,
+            )
+        except ImportError:
+            from utils import (
+                AutomationAPI,
+                TaskPriority,
+                CrossPlatformAutomationEngine,
+                CrossPlatformWindowManager,
+                TaskManager,
+                BaseTask,
+                Task,
+                TaskResult,
+                ExecutionMode,
+                ClickMode,
+                ImageMode,
+                AutomationConfig,
+            )
 
-        print("✓ config 模块导入成功")
-
-        # 测试窗口管理器
-        from window_manager import WindowManager, WindowInfo
-
-        print("✓ window_manager 模块导入成功")
-
-        # 测试自动化引擎
-        from automation import AutomationEngine
-
-        print("✓ automation 模块导入成功")
-
-        # 测试任务系统
-        from task_system import (
-            TaskManager,
-            Task,
-            TaskPriority,
-            TaskStatus,
-            TaskResult,
-            ClickTask,
-            ImageRecognitionTask,
-            BaseTask,
-            task_manager,
-        )
-
-        print("✓ task_system 模块导入成功")
-
-        # 测试主API
-        from main import AutomationAPI, api
-
-        print("✓ main 模块导入成功")
+        print("✓ utils 模块导入成功")
+        print("✓ AutomationAPI 导入成功")
+        print("✓ CrossPlatformWindowManager 导入成功")
+        print("✓ CrossPlatformAutomationEngine 导入成功")
+        print("✓ TaskManager 导入成功")
+        print("✓ 配置类型导入成功")
 
         return True
 
@@ -64,7 +68,14 @@ def test_config():
     print("\n=== 测试配置系统 ===")
 
     try:
-        from config import config, ExecutionMode, ClickMode, ImageMode
+        try:
+            from src.utils import ExecutionMode, ClickMode, ImageMode, AutomationConfig
+
+            config = AutomationConfig()
+        except ImportError:
+            from utils import ExecutionMode, ClickMode, ImageMode, AutomationConfig
+
+            config = AutomationConfig()
 
         # 测试执行模式设置
         config.set_execution_mode(ExecutionMode.THREAD)
@@ -106,7 +117,10 @@ def test_window_manager():
     print("\n=== 测试窗口管理器 ===")
 
     try:
-        from window_manager import WindowManager
+        try:
+            from src.utils import CrossPlatformWindowManager as WindowManager
+        except ImportError:
+            from utils import CrossPlatformWindowManager as WindowManager
 
         manager = WindowManager()
         print("✓ WindowManager 实例创建成功")
@@ -136,7 +150,10 @@ def test_task_system():
     print("\n=== 测试任务系统 ===")
 
     try:
-        from task_system import Task, TaskPriority, TaskStatus, TaskManager
+        try:
+            from src.utils import Task, TaskPriority, TaskStatus, TaskManager
+        except ImportError:
+            from utils import Task, TaskPriority, TaskStatus, TaskManager
 
         # 测试任务创建
         task = Task(
@@ -168,7 +185,10 @@ def test_automation_engine():
     print("\n=== 测试自动化引擎 ===")
 
     try:
-        from automation import AutomationEngine
+        try:
+            from src.utils import CrossPlatformAutomationEngine as AutomationEngine
+        except ImportError:
+            from utils import CrossPlatformAutomationEngine as AutomationEngine
 
         engine = AutomationEngine()
         print("✓ AutomationEngine 实例创建成功")
@@ -190,7 +210,10 @@ def test_main_api():
     print("\n=== 测试主API ===")
 
     try:
-        from main import AutomationAPI
+        try:
+            from src.utils import AutomationAPI
+        except ImportError:
+            from utils import AutomationAPI
 
         api = AutomationAPI()
         print("✓ AutomationAPI 实例创建成功")
@@ -222,13 +245,22 @@ def test_convenience_functions():
     print("\n=== 测试便捷函数 ===")
 
     try:
-        from main import (
-            set_thread_mode,
-            set_process_mode,
-            set_foreground_mode,
-            set_background_mode,
-            find_window,
-        )
+        try:
+            from src.utils.api_core import (
+                set_thread_mode,
+                set_process_mode,
+                set_foreground_mode,
+                set_background_mode,
+                find_window,
+            )
+        except ImportError:
+            from utils.api_core import (
+                set_thread_mode,
+                set_process_mode,
+                set_foreground_mode,
+                set_background_mode,
+                find_window,
+            )
 
         # 测试模式设置函数
         set_thread_mode()
@@ -260,8 +292,11 @@ def test_example_imports():
     print("\n=== 测试示例代码导入 ===")
 
     try:
-        # 测试基础示例
-        sys.path.append(os.path.join(os.path.dirname(__file__), "examples"))
+        # 测试基础示例 - 从test目录访问上级目录的examples
+        examples_path = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)), "examples"
+        )
+        sys.path.append(examples_path)
 
         # 不直接运行示例，只测试导入
         import importlib.util
@@ -269,7 +304,7 @@ def test_example_imports():
         # 测试基础示例导入
         basic_spec = importlib.util.spec_from_file_location(
             "basic_example",
-            os.path.join(os.path.dirname(__file__), "examples", "basic_example.py"),
+            os.path.join(examples_path, "basic_example.py"),
         )
         basic_module = importlib.util.module_from_spec(basic_spec)
         basic_spec.loader.exec_module(basic_module)
@@ -278,7 +313,7 @@ def test_example_imports():
         # 测试高级示例导入
         advanced_spec = importlib.util.spec_from_file_location(
             "advanced_example",
-            os.path.join(os.path.dirname(__file__), "examples", "advanced_example.py"),
+            os.path.join(examples_path, "advanced_example.py"),
         )
         advanced_module = importlib.util.module_from_spec(advanced_spec)
         advanced_spec.loader.exec_module(advanced_module)
@@ -297,18 +332,26 @@ def test_dependencies():
     print("\n=== 测试依赖包 ===")
 
     required_packages = [
-        "win32api",
-        "win32gui",
-        "win32con",
-        "win32process",
+        "pyautogui",
+        "pynput",
+        "pygetwindow",
         "cv2",
         "numpy",
         "PIL",
         "psutil",
     ]
 
+    # Windows特定包
+    windows_packages = [
+        "win32api",
+        "win32gui",
+        "win32con",
+        "win32process",
+    ]
+
     missing_packages = []
 
+    # 测试通用包
     for package in required_packages:
         try:
             __import__(package)
@@ -316,6 +359,20 @@ def test_dependencies():
         except ImportError:
             print(f"✗ {package} 缺失")
             missing_packages.append(package)
+
+    # 测试Windows特定包（仅在Windows上）
+    import platform
+
+    if platform.system() == "Windows":
+        for package in windows_packages:
+            try:
+                __import__(package)
+                print(f"✓ {package} 可用")
+            except ImportError:
+                print(f"! {package} 缺失 (Windows特定)")
+                missing_packages.append(package)
+    else:
+        print("! 非Windows系统，跳过Windows特定包检查")
 
     if missing_packages:
         print(f"\n缺失的包: {missing_packages}")

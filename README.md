@@ -2,6 +2,8 @@
 
 一个功能强大的跨平台软件自动化框架，支持Windows、macOS、Linux系统，提供多线程/多进程、前台/后台操作、图像识别等功能。
 
+
+
 ## 🚀 项目特性
 
 - **跨平台支持**: 支持Windows、macOS、Linux三大主流操作系统
@@ -11,7 +13,8 @@
 - **任务系统**: 类似React的任务管理系统，支持优先级、取消、重试等功能
 - **图像识别**: 基于OpenCV的模板匹配，支持精确的图像定位和点击
 - **简单易用**: 提供简洁的API接口，方便快速开发自动化脚本
-- **Docker支持**: 提供高效的Docker容器化方案，支持实时代码更新
+
+
 
 ## 📁 项目结构
 
@@ -27,11 +30,19 @@ qq-shuihu/
 ├── examples/                     # 示例代码
 │   ├── basic_example.py          # 基础使用示例
 │   └── advanced_example.py       # 高级使用示例
-├── requirements.txt              # Python依赖包
-├── Dockerfile                    # Docker构建文件
-├── docker-compose.yml           # Docker Compose配置
+├── test/                         # 测试和文档
+│   ├── test_cross_platform.py   # 跨平台测试
+│   ├── test_project.py           # 项目测试
+│   └── 开发流程.md               # 二次开发流程指南
+├── requirements.txt              # 通用Python依赖包
+├── requirements-windows.txt      # Windows平台专用依赖
+├── requirements-macos.txt        # macOS平台专用依赖
+├── requirements-linux.txt        # Linux平台专用依赖
+├── install_requirements.py       # 自动安装脚本
 └── README.md                     # 项目说明文档
 ```
+
+
 
 ## 🛠️ 环境要求
 
@@ -39,12 +50,36 @@ qq-shuihu/
 - **Python**: 3.8+
 - **依赖包**: 见 `requirements.txt`
 
+
+
 ## 📦 安装依赖
 
+### 🚀 自动安装（推荐）
+
 ```bash
-# 安装Python依赖包
+# 使用自动安装脚本，根据操作系统自动选择合适的依赖包
+python install_requirements.py
+```
+
+### 📋 手动安装
+
+根据你的操作系统选择对应的requirements文件：
+
+```bash
+# Windows用户
+pip install -r requirements-windows.txt
+
+# macOS用户
+pip install -r requirements-macos.txt
+
+# Linux用户
+pip install -r requirements-linux.txt
+
+# 通用安装（基础依赖）
 pip install -r requirements.txt
 ```
+
+
 
 ### 主要依赖包说明
 
@@ -56,6 +91,8 @@ pip install -r requirements.txt
 - `Pillow`: 图像处理
 - `psutil`: 系统进程管理
 
+
+
 ### 系统特定依赖
 
 #### Windows
@@ -64,13 +101,19 @@ pip install -r requirements.txt
 pip install pywin32
 ```
 
+
+
 #### macOS
+
 ```bash
 # 可能需要安装额外的系统权限
 # 在系统偏好设置 > 安全性与隐私 > 辅助功能中添加终端或Python
 ```
 
+
+
 #### Linux
+
 ```bash
 # Ubuntu/Debian
 sudo apt-get install python3-tk python3-dev
@@ -79,46 +122,83 @@ sudo apt-get install python3-tk python3-dev
 sudo apt-get install xvfb  # 用于无头环境
 ```
 
+
+
 ## 🚀 快速开始
 
 ### 基础使用
 
+以下是一个完整的基础使用示例（可参考 `examples/basic_example.py`）：
+
 ```python
+# examples/basic_example.py
 from src.main import AutomationAPI, TaskPriority
 from src.config import ClickMode, ImageMode
 
-# 创建API实例
-api = AutomationAPI()
+def main():
+    """基础使用示例"""
+    # 创建API实例
+    api = AutomationAPI()
 
-try:
-    # 启动自动化系统
-    api.start()
-    
-    # 设置为前台模式（跨平台兼容性更好）
-    api.set_click_mode(ClickMode.FOREGROUND)
-    api.set_image_mode(ImageMode.FOREGROUND)
-    
-    # 查找窗口（根据操作系统自动适配）
-    windows = api.find_windows_by_title("记事本")  # Windows
-    # windows = api.find_windows_by_title("TextEdit")  # macOS
-    # windows = api.find_windows_by_title("gedit")  # Linux
-    
-    if windows:
-        hwnd = windows[0].hwnd
+    try:
+        # 启动自动化系统
+        api.start()
         
-        # 直接点击
-        api.click(hwnd, 100, 100)
+        # 设置为前台模式（跨平台兼容性更好）
+        api.set_click_mode(ClickMode.FOREGROUND)
+        api.set_image_mode(ImageMode.FOREGROUND)
         
-        # 发送文本
-        api.send_text(hwnd, "Hello, 跨平台自动化!")
+        # 查找窗口（根据操作系统自动适配）
+        windows = api.find_windows_by_title("记事本")  # Windows
+        # windows = api.find_windows_by_title("TextEdit")  # macOS
+        # windows = api.find_windows_by_title("gedit")  # Linux
         
-        # 图像识别点击
-        api.click_image(hwnd, "button.png", threshold=0.8)
+        if windows:
+            hwnd = windows[0].hwnd
+            print(f"找到窗口: {windows[0].title}")
+            
+            # 直接点击
+            print("执行点击操作...")
+            api.click(hwnd, 100, 100)
+            
+            # 发送文本
+            print("发送文本...")
+            api.send_text(hwnd, "Hello, 跨平台自动化!")
+            
+            # 图像识别点击（需要先准备模板图片）
+            # 将按钮截图保存为 templates/button.png
+            print("尝试图像识别点击...")
+            try:
+                api.click_image(hwnd, "templates/button.png", threshold=0.8)
+                print("图像识别点击成功!")
+            except Exception as e:
+                print(f"图像识别失败: {e}")
+        else:
+            print("未找到目标窗口，请确保目标应用已打开")
 
-finally:
-    # 停止自动化系统
-    api.stop()
+    except Exception as e:
+        print(f"执行过程中发生错误: {e}")
+    finally:
+        # 停止自动化系统
+        api.stop()
+        print("自动化系统已停止")
+
+if __name__ == "__main__":
+    main()
 ```
+
+**运行方式：**
+```bash
+# 在项目根目录下运行
+python examples/basic_example.py
+```
+
+**模板图片准备：**
+- 将需要识别的按钮或图像截图保存到 `templates/` 目录
+- 支持的格式：PNG, JPG, JPEG
+- 建议图片尺寸不要过大，保持清晰度即可
+
+
 
 ### 跨平台窗口查找
 
@@ -141,6 +221,8 @@ for app_name in target_apps:
         break
 ```
 
+
+
 ### 任务系统使用
 
 ```python
@@ -158,6 +240,8 @@ task_id = api.create_click_task(
 result = api.wait_for_task(task_id, timeout=30)
 print(f"任务结果: {result.success}")
 ```
+
+
 
 ### 自定义任务
 
@@ -184,6 +268,8 @@ custom_task = CustomTask(task, "自定义参数")
 task_id = api.create_custom_task(custom_task)
 ```
 
+
+
 ## 🔧 配置说明
 
 ### 执行模式配置
@@ -198,6 +284,8 @@ api.set_execution_mode(ExecutionMode.THREAD)
 api.set_execution_mode(ExecutionMode.PROCESS)
 ```
 
+
+
 ### 操作模式配置
 
 ```python
@@ -211,6 +299,8 @@ api.set_image_mode(ImageMode.FOREGROUND)
 api.set_click_mode(ClickMode.BACKGROUND)
 api.set_image_mode(ImageMode.BACKGROUND)
 ```
+
+
 
 ## 📚 API 文档
 
@@ -237,6 +327,8 @@ api.show_window(hwnd)
 api.hide_window(hwnd)
 ```
 
+
+
 ### 自动化操作
 
 ```python
@@ -259,6 +351,8 @@ api.scroll(hwnd, x, y, direction="up", clicks=3)
 image = api.capture_window(hwnd)
 ```
 
+
+
 ### 任务管理
 
 ```python
@@ -280,40 +374,9 @@ task_ids = api.chain_tasks(task_configs)
 stats = api.get_task_statistics()
 ```
 
-## 🐳 Docker 使用
 
-### 构建镜像
 
-```bash
-# 构建基础镜像
-docker build -t qq-shuihu-automation .
-
-# 使用Docker Compose
-docker-compose up -d
-```
-
-### 开发环境
-
-```bash
-# 开发模式（实时代码更新）
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-```
-
-### 生产环境
-
-```bash
-# 生产模式
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-```
-
-### 挂载项目目录
-
-```bash
-# 挂载当前目录到容器，实现实时更新
-docker run -v $(pwd):/app qq-shuihu-automation
-```
-
-## 📝 示例代码
+## � 示例代码
 
 ### 运行基础示例
 
@@ -321,11 +384,15 @@ docker run -v $(pwd):/app qq-shuihu-automation
 python examples/basic_example.py
 ```
 
+
+
 ### 运行高级示例
 
 ```bash
 python examples/advanced_example.py
 ```
+
+
 
 ### 示例功能
 
@@ -337,7 +404,9 @@ python examples/advanced_example.py
 - **性能测试**: 大量任务处理性能测试
 - **真实场景**: 模拟表单填写等实际应用
 
-## 🔍 常见问题
+
+
+## � 常见问题
 
 ### Q: 如何在不同操作系统上处理窗口？
 
@@ -357,6 +426,8 @@ else:  # Linux
     windows = api.find_windows_by_title("gedit")
 ```
 
+
+
 ### Q: 后台模式在所有平台都支持吗？
 
 A: 后台模式的支持程度因操作系统而异：
@@ -366,6 +437,8 @@ A: 后台模式的支持程度因操作系统而异：
 - **Linux**: 在X11环境下支持，Wayland可能受限
 
 建议在跨平台应用中优先使用前台模式以确保兼容性。
+
+
 
 ### Q: 如何提高图像识别的准确性？
 
@@ -384,6 +457,8 @@ result = api.find_image(hwnd, "template.png", threshold=0.9)
 matches = api.automation_engine.find_all_images(hwnd, "template.png", threshold=0.8)
 ```
 
+
+
 ### Q: 如何处理权限问题？
 
 A: 不同操作系统的权限要求：
@@ -399,6 +474,8 @@ A: 不同操作系统的权限要求：
 **Windows**:
 - 通常不需要特殊权限
 - 某些受保护的应用可能需要管理员权限
+
+
 
 ### Q: 如何处理任务失败和重试？
 
@@ -420,68 +497,3 @@ if result:
     print(f"成功: {result.success}")
     print(f"重试次数: {result.retry_count}")
 ```
-
-## 🔄 从pywin32迁移
-
-本项目已从依赖pywin32的Windows专用方案迁移到跨平台方案：
-
-### 主要变化
-
-1. **窗口管理**: 从`win32gui`迁移到`pygetwindow`
-2. **自动化操作**: 从`win32api`迁移到`pyautogui`和`pynput`
-3. **窗口句柄**: 支持`Union[int, str]`类型以适应不同平台
-
-### 迁移指南
-
-如果你有基于旧版本的代码，主要需要注意：
-
-1. **导入更改**: 无需更改，API保持兼容
-2. **窗口句柄**: 现在可能是字符串类型，不仅仅是整数
-3. **后台操作**: 在某些平台可能受限，建议测试
-
-```python
-# 旧代码（仍然兼容）
-hwnd = windows[0].hwnd  # 可能是int或str
-api.click(hwnd, 100, 100)
-
-# 新代码（推荐的跨平台写法）
-import platform
-if platform.system() == "Windows":
-    target_app = "记事本"
-else:
-    target_app = "TextEdit" if platform.system() == "Darwin" else "gedit"
-
-windows = api.find_windows_by_title(target_app)
-```
-
-## 🤝 贡献指南
-
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开 Pull Request
-
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
-
-## 🙏 致谢
-
-- [pyautogui](https://github.com/asweigart/pyautogui) - 跨平台GUI自动化
-- [pynput](https://github.com/moses-palmer/pynput) - 跨平台输入控制
-- [pygetwindow](https://github.com/asweigart/PyGetWindow) - 跨平台窗口管理
-- [OpenCV](https://opencv.org/) - 图像处理和识别
-- [psutil](https://github.com/giampaolo/psutil) - 系统进程管理
-
-## 📞 联系方式
-
-如有问题或建议，请通过以下方式联系：
-
-- 提交 Issue
-- 发送邮件
-- 创建 Discussion
-
----
-
-**注意**: 本项目仅供学习和研究使用，请遵守相关法律法规，不得用于非法用途。使用时请注意各操作系统的权限要求和安全限制。

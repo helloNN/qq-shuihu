@@ -12,8 +12,7 @@ import platform
 # 添加src目录到路径
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from main import AutomationAPI, TaskPriority
-from config import ExecutionMode, ClickMode, ImageMode
+from utils import AutomationAPI, TaskPriority, ExecutionMode, ClickMode, ImageMode
 
 
 def basic_window_operations():

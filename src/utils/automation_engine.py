@@ -16,8 +16,8 @@ from pynput import mouse, keyboard
 from pynput.mouse import Button, Listener as MouseListener
 from pynput.keyboard import Key, Listener as KeyboardListener
 
-from .config import config, ClickMode, ImageMode
-from .window_manager import CrossPlatformWindowManager, WindowInfo
+from .config_manager import config, ClickMode, ImageMode
+from .window_utils import CrossPlatformWindowManager, WindowInfo
 
 
 class CrossPlatformAutomationEngine:

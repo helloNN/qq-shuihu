@@ -10,8 +10,8 @@ import platform
 import time
 import traceback
 
-# 添加src目录到路径
-sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
+# 添加src目录到路径 - 从test目录访问上级目录的src
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), "src"))
 
 try:
     # 尝试直接导入

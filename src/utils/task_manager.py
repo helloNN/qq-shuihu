@@ -15,7 +15,7 @@ import uuid
 import queue
 import logging
 
-from .config import config, ExecutionMode
+from .config_manager import config, ExecutionMode
 
 
 class TaskPriority(Enum):
@@ -115,7 +115,7 @@ class ClickTask(BaseTask):
             if self.is_cancelled():
                 return TaskResult(success=False, error="Task cancelled")
 
-            from .automation import CrossPlatformAutomationEngine
+            from .automation_engine import CrossPlatformAutomationEngine
 
             engine = CrossPlatformAutomationEngine()
 
@@ -166,7 +166,7 @@ class ImageRecognitionTask(BaseTask):
             if self.is_cancelled():
                 return TaskResult(success=False, error="Task cancelled")
 
-            from .automation import CrossPlatformAutomationEngine
+            from .automation_engine import CrossPlatformAutomationEngine
 
             engine = CrossPlatformAutomationEngine()
 
