@@ -545,6 +545,60 @@ class CrossPlatformWindowManager:
             self.logger.error(f"Error getting window at position: {e}")
         return None
 
+    def find_child_windows(self, parent_hwnd: int) -> List[WindowInfo]:
+        """查找指定父窗口的所有子窗口(Windows平台专用)"""
+        if not WINDOWS_NATIVE:
+            self.logger.warning("find_child_windows is only supported on Windows")
+            return []
+
+        child_windows = []
+
+        def enum_child_callback(hwnd: int, _: int) -> bool:
+            try:
+                # 获取窗口标题
+                length = win32gui.GetWindowTextLength(hwnd)
+                title = win32gui.GetWindowText(hwnd) if length > 0 else ""
+
+                # 获取类名
+                class_name = win32gui.GetClassName(hwnd)
+
+                # 获取进程信息
+                _, pid = win32process.GetWindowThreadProcessId(hwnd)
+                process_name = "Unknown"
+                try:
+                    process = psutil.Process(pid)
+                    process_name = process.name()
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
+
+                # 获取窗口位置和状态
+                rect = win32gui.GetWindowRect(hwnd)
+                is_visible = win32gui.IsWindowVisible(hwnd)
+                is_minimized = win32gui.IsIconic(hwnd)
+
+                # 创建WindowInfo对象
+                window_info = WindowInfo(
+                    hwnd=hwnd,
+                    title=title,
+                    class_name=class_name,
+                    pid=pid,
+                    process_name=process_name,
+                    rect=rect,
+                    is_visible=is_visible,
+                    is_minimized=is_minimized,
+                )
+                child_windows.append(window_info)
+            except Exception as e:
+                self.logger.error(f"Error processing child window {hwnd}: {e}")
+            return True  # 继续枚举
+
+        try:
+            win32gui.EnumChildWindows(parent_hwnd, enum_child_callback, 0)
+            return child_windows
+        except Exception as e:
+            self.logger.error(f"Error enumerating child windows: {e}")
+            return []
+
 
 # 为了向后兼容，创建别名
 WindowManager = CrossPlatformWindowManager

@@ -108,6 +108,10 @@ class AutomationAPI:
         """根据进程名查找窗口"""
         return self.window_manager.find_windows_by_process(process_name)
 
+    def find_child_windows(self, parent_hwnd: Union[int, str]) -> List[WindowInfo]:
+        """查找子窗口"""
+        return self.window_manager.find_child_windows(parent_hwnd)
+
     def get_all_windows(self, include_hidden: bool = False) -> List[WindowInfo]:
         """获取所有窗口"""
         return self.window_manager.get_all_windows(include_hidden)
