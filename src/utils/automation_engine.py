@@ -52,6 +52,7 @@ class CrossPlatformAutomationEngine:
             bool: 是否成功
         """
         try:
+            print(config.click_mode)
             if config.click_mode == ClickMode.FOREGROUND:
                 return self._foreground_click(hwnd, x, y, button)
             else:
@@ -77,6 +78,7 @@ class CrossPlatformAutomationEngine:
                 self.logger.error("Window not found")
                 return False
 
+            print(window_info.rect)
             # 计算屏幕坐标
             screen_x = window_info.rect[0] + x
             screen_y = window_info.rect[1] + y

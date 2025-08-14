@@ -46,36 +46,6 @@ if system == "Windows":
         except ImportError:
             logging.error("Neither pywin32 nor pygetwindow available")
 
-elif system == "Darwin":  # macOS
-    try:
-        import Quartz
-        import AppKit
-
-        MACOS_NATIVE = True
-
-        # 尝试导入pygetwindow
-        try:
-            import pygetwindow as gw
-
-            PYGETWINDOW_AVAILABLE = True
-        except (ImportError, NotImplementedError):
-            logging.warning("pygetwindow not available on macOS")
-
-    except ImportError:
-        logging.error("macOS native libraries not available")
-
-else:  # Linux
-    try:
-        import subprocess
-
-        LINUX_NATIVE = True
-        # 在Linux上，pygetwindow通常不可用，直接跳过导入
-        logging.info(
-            "Linux environment detected, using subprocess for window management"
-        )
-    except ImportError:
-        logging.error("subprocess not available on Linux")
-
 
 @dataclass
 class WindowInfo:
@@ -545,15 +515,30 @@ class CrossPlatformWindowManager:
             self.logger.error(f"Error getting window at position: {e}")
         return None
 
-    def find_child_windows(self, parent_hwnd: int) -> List[WindowInfo]:
-        """查找指定父窗口的所有子窗口(Windows平台专用)"""
+    def find_child_windows(
+        self, parent_hwnd: int, include_hidden: bool = True, max_depth: int = 20
+    ) -> List[WindowInfo]:
+        """查找指定父窗口的所有子窗口
+
+        参数:
+            parent_hwnd: 父窗口句柄
+            include_hidden: 是否包含隐藏窗口，默认为True
+            max_depth: 递归查找的最大深度，默认为20层
+
+        返回:
+            包含所有子窗口信息的WindowInfo列表
+        """
         if not WINDOWS_NATIVE:
             self.logger.warning("find_child_windows is only supported on Windows")
             return []
 
-        child_windows = []
+        all_child_windows = []
+        current_depth = 0
 
-        def enum_child_callback(hwnd: int, _: int) -> bool:
+        def enum_child_callback(hwnd: int, depth: int) -> bool:
+            nonlocal current_depth
+            current_depth = depth
+
             try:
                 # 获取窗口标题
                 length = win32gui.GetWindowTextLength(hwnd)
@@ -587,14 +572,26 @@ class CrossPlatformWindowManager:
                     is_visible=is_visible,
                     is_minimized=is_minimized,
                 )
-                child_windows.append(window_info)
+
+                # 如果包含隐藏窗口或窗口可见，则添加到结果
+                if include_hidden or is_visible:
+                    all_child_windows.append(window_info)
+
+                # 如果未达到最大深度，递归查找子窗口
+                if depth < max_depth:
+                    win32gui.EnumChildWindows(
+                        hwnd, lambda h, _: enum_child_callback(h, depth + 1), 0
+                    )
+
             except Exception as e:
                 self.logger.error(f"Error processing child window {hwnd}: {e}")
             return True  # 继续枚举
 
         try:
-            win32gui.EnumChildWindows(parent_hwnd, enum_child_callback, 0)
-            return child_windows
+            win32gui.EnumChildWindows(
+                parent_hwnd, lambda h, _: enum_child_callback(h, current_depth + 1), 0
+            )
+            return all_child_windows
         except Exception as e:
             self.logger.error(f"Error enumerating child windows: {e}")
             return []

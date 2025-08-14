@@ -49,10 +49,14 @@ except ImportError:
 class AutomationAPI:
     """自动化API主类"""
 
-    def __init__(self):
+    def __init__(self, hwnd: int):
+        """
+        hwnd: 窗口句柄
+        """
         self.window_manager = CrossPlatformWindowManager()
         self.automation_engine = CrossPlatformAutomationEngine()
         self.task_manager = task_manager
+        self.hwnd = hwnd
 
         # 设置日志
         logging.basicConfig(
@@ -129,11 +133,9 @@ class AutomationAPI:
         return self.window_manager.hide_window(hwnd)
 
     # 直接操作方法（同步）
-    def click(
-        self, hwnd: Union[int, str], x: int, y: int, button: str = "left"
-    ) -> bool:
-        """直接点击"""
-        return self.automation_engine.click(hwnd, x, y, button)
+    def click(self, x: int, y: int, button: str = "left") -> bool:
+        print(f"点击了坐标: ({x}, {y})")
+        return self.automation_engine.click(self.hwnd, x, y, button)
 
     def double_click(
         self, hwnd: Union[int, str], x: int, y: int, button: str = "left"
@@ -414,85 +416,3 @@ class AutomationAPI:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.stop()
-
-
-# 全局API实例
-api = AutomationAPI()
-
-
-# 便捷函数
-def start_automation():
-    """启动自动化系统"""
-    api.start()
-
-
-def stop_automation():
-    """停止自动化系统"""
-    api.stop()
-
-
-def set_thread_mode():
-    """设置为线程模式"""
-    api.set_execution_mode(ExecutionMode.THREAD)
-
-
-def set_process_mode():
-    """设置为进程模式"""
-    api.set_execution_mode(ExecutionMode.PROCESS)
-
-
-def set_foreground_mode():
-    """设置为前台模式"""
-    api.set_click_mode(ClickMode.FOREGROUND)
-    api.set_image_mode(ImageMode.FOREGROUND)
-
-
-def set_background_mode():
-    """设置为后台模式"""
-    api.set_click_mode(ClickMode.BACKGROUND)
-    api.set_image_mode(ImageMode.BACKGROUND)
-
-
-def find_window(title: str, exact_match: bool = False) -> Optional[WindowInfo]:
-    """查找窗口（返回第一个匹配的窗口）"""
-    windows = api.find_windows_by_title(title, exact_match)
-    return windows[0] if windows else None
-
-
-def click(hwnd: Union[int, str], x: int, y: int, button: str = "left") -> bool:
-    """点击"""
-    return api.click(hwnd, x, y, button)
-
-
-def click_image(
-    hwnd: Union[int, str],
-    template_path: str,
-    threshold: float = 0.8,
-    button: str = "left",
-) -> bool:
-    """点击图像"""
-    return api.click_image(hwnd, template_path, threshold, button)
-
-
-def create_click_task(
-    hwnd: Union[int, str], x: int, y: int, button: str = "left", **kwargs
-) -> str:
-    """创建点击任务"""
-    return api.create_click_task(hwnd, x, y, button, **kwargs)
-
-
-def create_image_task(
-    hwnd: Union[int, str], template_path: str, threshold: float = 0.8, **kwargs
-) -> str:
-    """创建图像识别任务"""
-    return api.create_image_recognition_task(hwnd, template_path, threshold, **kwargs)
-
-
-def wait_for_task(task_id: str, timeout: int = 60) -> Optional[TaskResult]:
-    """等待任务完成"""
-    return api.wait_for_task(task_id, timeout)
-
-
-def get_task_status(task_id: str) -> Optional[TaskStatus]:
-    """获取任务状态"""
-    return api.get_task_status(task_id)
