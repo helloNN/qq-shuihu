@@ -110,18 +110,56 @@ class Hwnd:
         try:
             window = self.get_hwndInfo(hwnd)
 
-            print(window)
+            # 尝试通过标题找到pygetwindow对象
+            windows = gw.getWindowsWithTitle(window.title)
+            if not windows:
+                return False
+
+            target_window = windows[0]
+
             # 如果窗口最小化，先恢复
-            if window.is_minimized:
-                window.restore()
+            if target_window.isMinimized:
+                target_window.restore()
 
             # 激活窗口
-            window.activate()
+            target_window.activate()
             return True
 
         except Exception as e:
             self.logger.error(f"将窗口置于前台[失败]: {e}")
             return False
+
+    @classmethod
+    def find_hwndByTitle_p_child(self, pTitle: str, childTitle=str) -> Union[int, None]:
+        """
+        根据父窗口标题和子窗口标题获取窗口信息
+
+        参数:
+            pTitle: 父窗口标题
+            childTitle: 子窗口标题
+
+        返回:
+            WindowInfo对象或None
+        """
+        targetHwnd = None
+
+        p_hwnd = win32gui.FindWindow(None, pTitle)
+        if not p_hwnd:
+            logging.error(f"find_hwndByTitle_p_child:\t未找到父窗口({pTitle})")
+            return None
+
+        def fn(hwnd, _):
+            nonlocal targetHwnd
+            title = win32gui.GetWindowText(hwnd)
+            if title == childTitle:
+                targetHwnd = hwnd
+                return
+            else:
+                return
+
+        win32gui.EnumChildWindows(p_hwnd, fn, None)
+
+        return targetHwnd
 
 
 class Automation(Hwnd):
@@ -150,6 +188,7 @@ class Automation(Hwnd):
             # 获取窗口信息
             window_info = self.bring_window_to_front(self.hwnd)
             if not window_info:
+                self.logger.error(f"无法获取窗口信息, 所以: 前台点击失败({self.hwnd}) ")
                 return False
 
             print(window_info.rect)

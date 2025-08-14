@@ -2,7 +2,7 @@ from utils.hwnd import GameHwnd
 
 
 def main():
-    game1 = GameHwnd(66708)
+    game1 = GameHwnd(328922)
     # res = game1.find_childHwnds(66708, include_hidden=True, max_depth=20)
     # for window in res:
     #     print(
@@ -10,9 +10,11 @@ def main():
     #     )
 
     # print(res)
+    hwnd = game1.find_hwndByTitle_p_child("MainWindow", "Chrome Legacy Window")
 
     game1.hello()
-    game1.click(653, 430, "left")
+    print(f"获取到的窗口句柄: {hwnd}")
+    # game1.click(653, 430, "left")
 
 
 if __name__ == "__main__":
