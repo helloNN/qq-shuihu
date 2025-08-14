@@ -34,6 +34,7 @@ dependencies = [
     "pywin32-ctypes>=0.2.2", # Windows COM支持
     "comtypes>=1.2.0",       # Windows COM接口
     "wmi>=1.5.1",            # Windows管理接口
+    "pywinauto >=0.6.9",     # Windows GUI自动化
     # Windows Shell操作
     "winshell>=0.6",
 ]

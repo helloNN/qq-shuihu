@@ -412,3 +412,125 @@ if result:
     print(f"成功: {result.success}")
     print(f"重试次数: {result.retry_count}")
 ```
+
+
+
+
+
+## 关键文档
+
+### pygetwindow【舍弃】
+
+[参考文档](https://blog.csdn.net/zhangkexin_z/article/details/147196434)
+
+pygetwindow是一个跨平台的Python库，用于获取和操作系统窗口。其核心功能包括：
+
+- 获取窗口信息：获取当前活跃窗口、所有打开窗口的列表，以及根据标题获取特定窗口
+- 控制窗口行为：激活、最小化、最大化、关闭窗口，以及获取和设置窗口的位置、大小等属性。
+- 窗口枚举与定位：枚举桌面上的所有窗口，定位特定窗口并执行操作。
+- 窗口同步：将自动化脚本的执行与特定窗口同步，确保操作在正确的时间和上下文中执行。
+
+pygetwindow支持Windows、Mac和Linux系统，为不同平台的窗口操作提供了统一的接口，极大地简化了开发者的开发工作。
+
+<span style="color:#cc0066;font-weight:600;margin-inline:3px;">pygetwindow所有api只能获取顶层窗口，不能获取子窗口</span>
+
+> `pygetwindow` 的限制：
+>
+> - **功能范围**：该库是对操作系统原生API（如Windows的 `EnumWindows`）的简单封装，而原生API默认只枚举 **顶层窗口**（如浏览器主窗口、记事本窗口等）。
+> - **子窗口不可见**：子窗口（如按钮、输入框、面板等）属于控件层次，通常不会出现在系统的全局窗口列表中。
+
+```bash
+pip install pygetwindow
+```
+
+
+
+#### api
+
+##### getWindowsWithTitle
+
+getWindowsWithTitle：根据窗口标题，获取顶层窗口信息
+
+- 无法直接获取子窗口（子控件或嵌套窗口）的详细信息，因为：Windows窗口管理API默认只枚举顶层窗口
+
+```python
+import pygetwindow as gw
+
+windows = gw.getWindowsWithTitle("MainWindow")
+```
+
+
+
+原生api操作子窗口
+
+```python
+import win32gui
+
+
+def callback(hwnd, extra):
+    if win32gui.GetWindowText(hwnd) == "Chrome Legacy Window":
+        print("找到子窗口句柄:", hwnd)
+
+
+# 枚举所有子窗口
+parent_hwnd = win32gui.FindWindow(None, "MainWindow")
+win32gui.EnumChildWindows(parent_hwnd, callback, None)
+```
+
+> 找到子窗口句柄: 66726
+
+
+
+##### getAllWindows
+
+getAllWindows：获取所有顶层窗口列表
+
+```python
+import pygetwindow as gw
+
+# 获取所有窗口列表
+all_windows = gw.getAllWindows()
+
+# 遍历窗口列表，执行操作
+for window in all_windows:
+    print(f"窗口标题: {window.title}, 句柄: {window._hWnd}")
+```
+
+> 获取到的数据和按键抓抓获取到的顶层数据：一模一样
+
+
+
+
+
+### pywinauto 
+
+[官网文档](https://pywinauto.readthedocs.io/en/latest/)
+
+**`pywinauto` 既支持前台操作（可见窗口交互），也支持后台操作（隐藏窗口或无界面操作）**
+
+> 使用 Inspect.exe（Windows SDK工具）查看控件属性，确保能定位到目标
+
+所以你需要学习：
+
+- pywinauto
+- Inspect.exe
+
+
+
+#### 获取所有窗口（含子窗口）
+
+```python
+from pywinauto import Application
+
+# 连接到顶层窗口
+app = Application(backend="uia").connect(title="MainWindow")
+main_window = app.window(title="MainWindow")
+
+# 打印所有子控件（递归遍历）
+main_window.print_control_identifiers()
+```
+
+- **优点**：自动递归获取所有子控件（包括隐藏的嵌套结构）。
+- **参数说明**：
+  - `backend="win32"`：适合传统Win32应用（如记事本、计算器）
+  - `backend="uia"`：适合现代应用（WPF、Electron），支持更多后台操作

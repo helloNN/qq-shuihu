@@ -11,10 +11,10 @@ def main():
 
     # print(res)
     hwnd = game1.find_hwndByTitle_p_child("MainWindow", "Chrome Legacy Window")
+    print(f"找到的窗口句柄: {hwnd}")
+    game1.set_hwnd(hwnd)
 
-    game1.hello()
-    print(f"获取到的窗口句柄: {hwnd}")
-    # game1.click(653, 430, "left")
+    game1.click(985, 155, "left")
 
 
 if __name__ == "__main__":

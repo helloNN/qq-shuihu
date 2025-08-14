@@ -109,9 +109,10 @@ class Hwnd:
         """将窗口置于前台"""
         try:
             window = self.get_hwndInfo(hwnd)
-
+            print(window)
             # 尝试通过标题找到pygetwindow对象
             windows = gw.getWindowsWithTitle(window.title)
+            print(windows)
             if not windows:
                 return False
 
