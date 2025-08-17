@@ -269,7 +269,7 @@ class GameHwnd(Automation):
 
     logger = logging.getLogger(__name__)
 
-    def __init__(self, hwnd: int):
+    def __init__(self, hwnd: int = None):
         """
         hwnd: 窗口句柄
         """

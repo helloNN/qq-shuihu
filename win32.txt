@@ -1,0 +1,403 @@
+D:\Desktop\qq-shuihu\.venv\Lib\site-packages\pywinauto\application.py:1085: UserWarning: 32-bit application should be automated using 32-bit Python (you use 64-bit Python)
+  warnings.warn(
+Control Identifiers:
+
+HwndWrapper[qq108miniwpfn45.exe;;35f8f754-3b16-49f3-9a80-7180201f1657] - 'MainWindow'    (L92, T217, R1300, B1167)
+['MainWindowHwndWrapper[qq108miniwpfn45.exe;;35f8f754-3b16-49f3-9a80-7180201f1657]', 'MainWindow', 'HwndWrapper[qq108miniwpfn45.exe;;35f8f754-3b16-49f3-9a80-7180201f1657]']
+child_window(title="MainWindow", class_name="HwndWrapper[qq108miniwpfn45.exe;;35f8f754-3b16-49f3-9a80-7180201f1657]")
+   |
+   | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad1', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad10', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad11', 'MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad10', 'MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad11']
+   |    |
+   |    | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L-32672, T-32476, R-32672, B-32476)
+   |    | ['WindowsForms10.Window.8.app.0.31d4ff3_r7_ad12']
+   |    |
+   |    | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad12', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad13']
+   |
+   | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L-32672, T-32476, R-32672, B-32476)
+   | ['WindowsForms10.Window.8.app.0.31d4ff3_r7_ad12']
+   |
+   | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad12', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad13']
+   |
+   | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad13', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad14']
+   |    |
+   |    | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L-32672, T-32476, R-32672, B-32476)
+   |    | ['WindowsForms10.Window.8.app.0.31d4ff3_r7_ad15']
+   |    |
+   |    | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad14', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad16']
+   |    | child_window(auto_id="browserContainer", control_type="System.Windows.Forms.Panel")
+   |    |    |
+   |    |    | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad15', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad17']
+   |    |    |    |
+   |    |    |    | CefBrowserWindow - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowCefBrowserWindow', 'CefBrowserWindow']
+   |    |    |    | child_window(class_name="CefBrowserWindow")
+   |    |    |    |    |
+   |    |    |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |    |    |
+   |    |    |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |    |    |
+   |    |    |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |    |    |
+   |    |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |    |
+   |    |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |    |
+   |    |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |    |
+   |    |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |    |
+   |    |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | CefBrowserWindow - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowCefBrowserWindow', 'CefBrowserWindow']
+   |    |    | child_window(class_name="CefBrowserWindow")
+   |    |    |    |
+   |    |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |    |
+   |    |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |    |
+   |    |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad15', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad17']
+   |    |    |
+   |    |    | CefBrowserWindow - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowCefBrowserWindow', 'CefBrowserWindow']
+   |    |    | child_window(class_name="CefBrowserWindow")
+   |    |    |    |
+   |    |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |    |
+   |    |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |    |
+   |    |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | CefBrowserWindow - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowCefBrowserWindow', 'CefBrowserWindow']
+   |    | child_window(class_name="CefBrowserWindow")
+   |    |    |
+   |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |
+   |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    | child_window(class_name="Intermediate D3D Window")
+   |
+   | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L-32672, T-32476, R-32672, B-32476)
+   | ['WindowsForms10.Window.8.app.0.31d4ff3_r7_ad15']
+   |
+   | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad14', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad16']
+   | child_window(auto_id="browserContainer", control_type="System.Windows.Forms.Panel")
+   |    |
+   |    | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad15', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad17']
+   |    |    |
+   |    |    | CefBrowserWindow - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowCefBrowserWindow', 'CefBrowserWindow']
+   |    |    | child_window(class_name="CefBrowserWindow")
+   |    |    |    |
+   |    |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |    |
+   |    |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |    |
+   |    |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | CefBrowserWindow - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowCefBrowserWindow', 'CefBrowserWindow']
+   |    | child_window(class_name="CefBrowserWindow")
+   |    |    |
+   |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |
+   |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    | child_window(class_name="Intermediate D3D Window")
+   |
+   | WindowsForms10.Window.8.app.0.31d4ff3_r7_ad1 - ''    (L96, T292, R1296, B1163)
+   | ['MainWindowWindowsForms10.Window.8.app.0.31d4ff3_r7_ad15', 'WindowsForms10.Window.8.app.0.31d4ff3_r7_ad17']
+   |    |
+   |    | CefBrowserWindow - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowCefBrowserWindow', 'CefBrowserWindow']
+   |    | child_window(class_name="CefBrowserWindow")
+   |    |    |
+   |    |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |    |
+   |    |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |    |
+   |    |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |
+   |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    | child_window(class_name="Intermediate D3D Window")
+   |
+   | CefBrowserWindow - ''    (L96, T292, R1296, B1163)
+   | ['MainWindowCefBrowserWindow', 'CefBrowserWindow']
+   | child_window(class_name="CefBrowserWindow")
+   |    |
+   |    | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   |    | child_window(class_name="Chrome_WidgetWin_0")
+   |    |    |
+   |    |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |    |
+   |    |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    |    | child_window(class_name="Intermediate D3D Window")
+   |    |
+   |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |
+   |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    | child_window(class_name="Intermediate D3D Window")
+   |
+   | Chrome_WidgetWin_0 - ''    (L96, T292, R1296, B1163)
+   | ['MainWindowChrome_WidgetWin_0', 'Chrome_WidgetWin_0']
+   | child_window(class_name="Chrome_WidgetWin_0")
+   |    |
+   |    | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   |    | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   |    | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |    |
+   |    | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   |    | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   |    | child_window(class_name="Intermediate D3D Window")
+   |
+   | Chrome_RenderWidgetHostHWND - 'Chrome Legacy Window'    (L96, T292, R1296, B1163)
+   | ['Chrome_RenderWidgetHostHWND', 'Chrome Legacy Window', 'Chrome Legacy WindowChrome_RenderWidgetHostHWND']
+   | child_window(title="Chrome Legacy Window", class_name="Chrome_RenderWidgetHostHWND")
+   |
+   | Intermediate D3D Window - ''    (L96, T292, R1296, B1163)
+   | ['MainWindowIntermediate D3D Window', 'Intermediate D3D Window']
+   | child_window(class_name="Intermediate D3D Window")
