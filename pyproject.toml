@@ -9,8 +9,6 @@ dependencies = [
     "opencv-python>=4.8.0",
     "numpy>=1.24.0",
     "Pillow>=10.0.0",
-    # 系统和进程管理
-    "psutil>=5.9.0",
     # 窗口管理
     "pygetwindow>=0.0.9",
     # 测试框架
@@ -34,7 +32,10 @@ dependencies = [
     "pywin32-ctypes>=0.2.2", # Windows COM支持
     "comtypes>=1.2.0",       # Windows COM接口
     "wmi>=1.5.1",            # Windows管理接口
-    "pywinauto >=0.6.9",     # Windows GUI自动化
     # Windows Shell操作
     "winshell>=0.6",
+
+    # 个人添加的库
+    "pywinauto >=0.6.9", # Windows GUI自动化
+    "psutil>=7.0.0",     # Windows系统和进程管理
 ]
