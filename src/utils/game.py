@@ -11,19 +11,22 @@ logging.basicConfig(
 
 
 class Game:
-    """窗口句柄管理类"""
+    """游戏管理类"""
 
-    logger = logging.getLogger(__name__)
     hwnd = None
+    name = ""
+    logger = None
     coordDiff = (0, 0)  # 位置偏移
     util = None
     beibao: Beibao = None
 
-    def __init__(self, hwnd: int = None):
+    def __init__(self, hwnd: int = None, name=""):
         """
         hwnd: 窗口句柄
         """
         self.hwnd = hwnd
+        self.name = name
+        self.logger = logging.getLogger(f"Game-{self.name or __name__}")
 
     def _mountFuture(self):
         util = Util(self.hwnd, self.coordDiff, self.logger)
