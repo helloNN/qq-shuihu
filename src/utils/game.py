@@ -3,7 +3,7 @@ from .util import Util
 from future.beibao import Beibao
 
 logging.basicConfig(
-    filename="game.log",
+    filename="logs/game.log",
     level=logging.DEBUG,
     format="%(asctime)s | %(levelname)s | %(message)s",
     encoding="utf-8",
@@ -27,6 +27,27 @@ class Game:
         self.hwnd = hwnd
         self.name = name
         self.logger = logging.getLogger(f"Game-{self.name or __name__}")
+        if name:
+            # 多任务则自定义日志
+            self._cutomLogger()
+
+    def _cutomLogger(self):
+        """自定义日志"""
+        log_filename = f"logs/{self.name}.log"
+        handler_exists = any(
+            isinstance(h, logging.FileHandler) and h.baseFilename.endswith(log_filename)
+            for h in self.logger.handlers
+        )
+
+        if not handler_exists:
+            file_handler = logging.FileHandler(log_filename, encoding="utf-8")
+            file_handler.setLevel(logging.DEBUG)
+            formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
+            file_handler.setFormatter(formatter)
+            self.logger.addHandler(file_handler)
+            self.logger.propagate = False  # 不向上传播到根日志器
+
+        self.logger.info(f"{self.name} | 日志游戏实例初始化")
 
     def _mountFuture(self):
         util = Util(self.hwnd, self.coordDiff, self.logger)
@@ -41,7 +62,7 @@ class Game:
 
     def count_position(self, app):
         """计算窗口位置"""
-        print("计算窗口位置")
+        print(f"{self.name + ':' if self.name else ''}计算窗口位置")
 
         mainWindow = app.MainWindow
         mainWindowRect = mainWindow.rectangle()
