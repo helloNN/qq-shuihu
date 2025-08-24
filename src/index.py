@@ -8,6 +8,7 @@ def do_task(game):
 
 # 后续思路， 通过 handle 得到多个 app ，然后处理
 # handle 手动获取, 目前无法通过代码一次夺取全都符合条件的窗口句柄
+# 图像识别
 def main():
     # 1.查找窗口
     game = Game()
@@ -27,4 +28,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n程序已退出")
+    except Exception as e:
+        print(e)
