@@ -1,11 +1,10 @@
 from dataclasses import dataclass
 from typing import List, Tuple, Union
-import win32gui
-import win32process
+import win32gui  # 获取窗口信息
+import win32process  # 获取进程信息
 import psutil  # 使用psutil获取进程信息
-import logging
+
 import pygetwindow as gw  # 用于获取窗口信息
-import pyautogui  # 用于前台点击
 
 
 @dataclass
@@ -56,7 +55,7 @@ class Hwnd:
                 is_minimized=is_minimized,
             )
         except Exception as e:
-            logging.error(f"Error getting window info for hwnd {hwnd}: {e}")
+            print(f"Error getting window info for hwnd {hwnd}: {e}")
             return None
 
     @classmethod
@@ -92,7 +91,7 @@ class Hwnd:
                     )
 
             except Exception as e:
-                logging.error(f"Error processing child window {hwnd}: {e}")
+                print(f"Error processing child window {hwnd}: {e}")
             return True  # 继续枚举
 
         try:
@@ -101,7 +100,7 @@ class Hwnd:
             )
             return all_child_windows
         except Exception as e:
-            logging.error(f"Error enumerating child windows for hwnd {hwnd}: {e}")
+            print(f"Error enumerating child windows for hwnd {hwnd}: {e}")
             return []
 
     @classmethod
@@ -127,7 +126,7 @@ class Hwnd:
             return True
 
         except Exception as e:
-            self.logger.error(f"将窗口置于前台[失败]: {e}")
+            print(f"将窗口置于前台[失败]: {e}")
             return False
 
     @classmethod
@@ -146,7 +145,7 @@ class Hwnd:
 
         p_hwnd = win32gui.FindWindow(None, pTitle)
         if not p_hwnd:
-            logging.error(f"find_hwndByTitle_p_child:\t未找到父窗口({pTitle})")
+            print(f"find_hwndByTitle_p_child:\t未找到父窗口({pTitle})")
             return None
 
         def fn(hwnd, _):
@@ -161,120 +160,3 @@ class Hwnd:
         win32gui.EnumChildWindows(p_hwnd, fn, None)
 
         return targetHwnd
-
-
-class Automation(Hwnd):
-    name = "automation"
-    desc = "自动化操作类"
-    clickMode = "FE"  # 默认前台点击
-    hwnd = None
-
-    def __init__(self):
-        self.clickMode = "FE"
-
-    def set_clickMode(self, mode: str):
-        """
-        设置点击模式
-        参数:
-            mode: 'FE' 前台点击, 'BG' 后台点击
-        """
-        if mode in ["FE", "BG"]:
-            self.clickMode = mode
-        else:
-            raise ValueError("Invalid click mode. Use 'FE' or 'BG'.")
-
-    def _FE_click(self, x: int, y: int, button: str) -> bool:
-        """前台点击"""
-        try:
-            # 获取窗口信息
-            window_info = self.bring_window_to_front(self.hwnd)
-            if not window_info:
-                self.logger.error(f"无法获取窗口信息, 所以: 前台点击失败({self.hwnd}) ")
-                return False
-
-            print(window_info.rect)
-            # 计算屏幕坐标
-            screen_x = window_info.rect[0] + x
-            screen_y = window_info.rect[1] + y
-
-            # 使用pyautogui进行点击
-            mouse_button = self._get_button(button)
-            pyautogui.click(screen_x, screen_y, button=mouse_button)
-
-            return True
-
-        except Exception as e:
-            self.logger.error(f"FE click failed: {e}")
-            return False
-
-    def _BG_click(self, x: int, y: int, button: str) -> bool:
-        """后台点击"""
-        try:
-            # 对于跨平台兼容性，后台点击实际上还是需要前台操作
-            # 但我们可以先保存当前鼠标位置，点击后恢复
-            current_pos = pyautogui.position()
-
-            # 获取窗口信息
-            window = self.get_hwndInfo(self.hwnd)
-
-            # 计算屏幕坐标
-            screen_x = window.rect[0] + x
-            screen_y = window.rect[1] + y
-
-            # 执行点击
-            mouse_button = self._get_button(button)
-            pyautogui.click(screen_x, screen_y, button=mouse_button)
-
-            # 恢复鼠标位置
-            pyautogui.moveTo(current_pos.x, current_pos.y)
-
-            return True
-
-        except Exception as e:
-            self.logger.error(f"BG click failed: {e}")
-            return False
-
-    def _get_button(self, button: str) -> str:
-        """获取pyautogui的按钮名称"""
-        button_map = {"left": "left", "right": "right", "middle": "middle"}
-        return button_map.get(button.lower(), "left")
-
-    def click(self, x: int, y: int, button: str = "left") -> bool:
-        """
-        点击指定窗口的坐标
-
-        Args:
-            x: X坐标（相对于窗口）
-            y: Y坐标（相对于窗口）
-            button: 鼠标按钮 ("left", "right", "middle")
-
-        Returns:
-            bool: 是否成功
-        """
-        try:
-            if self.clickMode == "FE":
-                return self._FE_click(x, y, button)
-            else:
-                return self._BG_click(x, y, button)
-        except Exception as e:
-            self.logger.error(f"点击失败: {e}")
-            return False
-
-    def hello(self):
-        print("Hello from Automation")
-
-
-class GameHwnd(Automation):
-    """窗口句柄管理类"""
-
-    logger = logging.getLogger(__name__)
-
-    def __init__(self, hwnd: int = None):
-        """
-        hwnd: 窗口句柄
-        """
-        self.hwnd = hwnd
-
-    def set_hwnd(self, hwnd: int):
-        """设置窗口句柄"""
-        self.hwnd = hwnd
