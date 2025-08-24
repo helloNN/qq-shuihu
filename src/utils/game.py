@@ -13,26 +13,28 @@ logging.basicConfig(
 class Game:
     """窗口句柄管理类"""
 
-    logger = None
+    logger = logging.getLogger(__name__)
     hwnd = None
     coordDiff = (0, 0)  # 位置偏移
+    util = None
+    beibao: Beibao = None
 
     def __init__(self, hwnd: int = None):
         """
         hwnd: 窗口句柄
         """
-        logger = logging.getLogger(__name__)
-
         self.hwnd = hwnd
-        self.logger = logger
+
+    def _mountFuture(self):
+        util = Util(self.hwnd, self.coordDiff, self.logger)
+        self.util = util
 
         # 挂载背包功能
-        self.beibao = Beibao(logger, hwnd)
+        self.beibao = Beibao(util)
 
     def set_hwnd(self, hwnd: int):
         """设置窗口句柄"""
         self.hwnd = hwnd
-        self.beibao.set_hwnd(hwnd)
 
     def count_position(self, app):
         """计算窗口位置"""
@@ -59,6 +61,8 @@ class Game:
         )
 
         self.logger.info(f"flash窗口到联系官方窗口位置偏移: {self.coordDiff}")
+        # 挂载功能
+        self._mountFuture()
 
     def click_lt(self, coord):
         """鼠标左键点击"""

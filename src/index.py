@@ -15,7 +15,7 @@ def main():
     if hwnd is None:
         game.logger.error("未找到窗口")
         return
-    game.logger.info(f"[{hwnd}] 找到的窗口句柄")
+    game.logger.info(f"{hwnd} | 找到窗口")
     game.set_hwnd(hwnd)
 
     # 2.连接窗口 && 计算位置
