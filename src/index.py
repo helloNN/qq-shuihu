@@ -1,21 +1,40 @@
 from utils import Game, Hwnd
 from pywinauto import Application
+import os
+import multiprocessing  # 导入线程包
+import time
+
+# 进程列表
+processList = []
 
 
-def do_task(game):
-    game.beibao.liehun()
+def do_task(game: Game):
+    app = Application(backend="uia").connect(handle=game.hwnd)
+    game.count_position(app)
+    # game.Bianqiang.liehun()
+    game.Fuben.zhengzhan()
 
 
 def more_task():
+    print(f"cpu核心数: {os.cpu_count()}")
+    global processList
     games = [
-        Game(918842, "2548918215"),
-        Game(525474, "2468659059"),
-        Game(263250, "3305194332"),
+        Game(263144, "2548918215"),
+        Game(524878, "2468659059"),
+        Game(1836096, "3305194332"),
     ]
 
     for game in games:
-        app = Application(backend="uia").connect(handle=game.hwnd)
-        game.count_position(app)
+        try:
+            # 创建进程
+            p = multiprocessing.Process(target=do_task, args=(game,))
+            processList.append(p)
+            # 设置为守护进程，主进程结束，子进程也结束
+            p.daemon = True
+            # 启动进程
+            p.start()
+        except Exception as e:
+            print(f"index.py | {game.qq} | 任务错误:", e)
 
 
 def single_task():
@@ -28,12 +47,14 @@ def single_task():
     game.logger.info(f"{hwnd} | 找到窗口")
     game.set_hwnd(hwnd)
 
-    # 2.连接窗口 && 计算位置
-    app = Application(backend="uia").connect(handle=hwnd)
-    game.count_position(app)
-
-    # 3.执行操作
+    # 2.执行操作
     do_task(game)
+
+
+# 是否还有进程在处理任务
+def check_process() -> bool:
+    global processList
+    """类似js的every方法"""
 
 
 # 后续思路， 通过 handle 得到多个 app ，然后处理
@@ -49,8 +70,15 @@ def main(mode="single"):
 
 if __name__ == "__main__":
     try:
-        main("more")
+        main()
+        while True:
+            time.sleep(5)
+            check_process()
+
+            # print("暂时没有获取的进程")
+            # time.sleep(60)
+
     except KeyboardInterrupt:
         print("\n程序已退出")
     except Exception as e:
-        print(e)
+        print("index.py | 未知错误:", e)

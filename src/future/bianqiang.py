@@ -4,7 +4,7 @@ import time as TM
 from utils.util import Util
 
 
-class Beibao:
+class Bianqiang:
     util: Util = None
     logger = None
 

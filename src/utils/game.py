@@ -1,6 +1,6 @@
 import logging
 from .util import Util
-from future.beibao import Beibao
+from future import Bianqiang, Fuben
 
 logging.basicConfig(
     filename="logs/game.log",
@@ -14,26 +14,26 @@ class Game:
     """游戏管理类"""
 
     hwnd = None
-    name = ""
+    qq = ""
     logger = None
     coordDiff = (0, 0)  # 位置偏移
     util = None
-    beibao: Beibao = None
+    Bianqiang = None
 
-    def __init__(self, hwnd: int = None, name=""):
+    def __init__(self, hwnd: int = None, qq=""):
         """
         hwnd: 窗口句柄
         """
         self.hwnd = hwnd
-        self.name = name
-        self.logger = logging.getLogger(f"Game-{self.name or __name__}")
-        if name:
+        self.qq = qq
+        self.logger = logging.getLogger(f"Game-{self.qq or __name__}")
+        if qq:
             # 多任务则自定义日志
             self._cutomLogger()
 
     def _cutomLogger(self):
         """自定义日志"""
-        log_filename = f"logs/{self.name}.log"
+        log_filename = f"logs/{self.qq}.log"
         handler_exists = any(
             isinstance(h, logging.FileHandler) and h.baseFilename.endswith(log_filename)
             for h in self.logger.handlers
@@ -47,22 +47,23 @@ class Game:
             self.logger.addHandler(file_handler)
             self.logger.propagate = False  # 不向上传播到根日志器
 
-        self.logger.info(f"{self.name} | 日志游戏实例初始化")
+        self.logger.info(f"{self.qq} | 日志游戏实例初始化")
 
     def _mountFuture(self):
         util = Util(self.hwnd, self.coordDiff, self.logger)
         self.util = util
 
-        # 挂载背包功能
-        self.beibao = Beibao(util)
+        # 挂载功能
+        self.Bianqiang = Bianqiang(util)
+        self.Fuben = Fuben(util)
 
     def set_hwnd(self, hwnd: int):
         """设置窗口句柄"""
         self.hwnd = hwnd
 
     def count_position(self, app):
-        """计算窗口位置"""
-        print(f"{self.name + ':' if self.name else ''}计算窗口位置")
+        """计算窗口位置，并挂载功能"""
+        print(f"{self.qq + ':' if self.qq else ''}计算窗口位置")
 
         mainWindow = app.MainWindow
         mainWindowRect = mainWindow.rectangle()

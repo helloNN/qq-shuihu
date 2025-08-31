@@ -1,14 +1,15 @@
 import win32api
 import win32con
 import time
+from logging import Logger
 
 
 class Util:
     hwnd = None
     offset = (0, 0)
-    logger = None
+    logger: Logger = None
 
-    def __init__(self, hwnd, offset, logger):
+    def __init__(self, hwnd, offset, logger: Logger):
         self.hwnd = hwnd
         self.offset = offset
         self.logger = logger
