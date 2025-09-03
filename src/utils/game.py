@@ -1,6 +1,8 @@
 import logging
+import json
+import os
 from .util import Util
-from future import Bianqiang, Fuben
+from future import Bianqiang, Fuben, Zhanzheng
 
 logging.basicConfig(
     filename="logs/game.log",
@@ -19,6 +21,7 @@ class Game:
     coordDiff = (0, 0)  # 位置偏移
     util = None
     Bianqiang = None
+    config = {}
 
     def __init__(self, hwnd: int = None, qq=""):
         """
@@ -30,6 +33,7 @@ class Game:
         if qq:
             # 多任务则自定义日志
             self._cutomLogger()
+        self.load_config()
 
     def _cutomLogger(self):
         """自定义日志"""
@@ -54,8 +58,9 @@ class Game:
         self.util = util
 
         # 挂载功能
-        self.Bianqiang = Bianqiang(util)
-        self.Fuben = Fuben(util)
+        self.Bianqiang = Bianqiang(util, self.config.get("变强", {}))
+        self.Fuben = Fuben(util, self.config.get("副本", {}))
+        self.Zhanzheng = Zhanzheng(util, self.config.get("战争", {}))
 
     def set_hwnd(self, hwnd: int):
         """设置窗口句柄"""
@@ -99,3 +104,22 @@ class Game:
                 "logger": self.logger,
             }
         )
+
+    def load_config(self):
+        """加载配置文件"""
+
+        currentDir = os.path.dirname(os.path.abspath(__file__))
+        baseConfigPath = os.path.join(currentDir, "..", "config", "base.json")
+        with open(baseConfigPath, "r", encoding="utf-8") as f:
+            config = json.load(f)
+            self.logger.info(f"加载配置文件: {baseConfigPath}")
+
+        if self.qq:
+            qqConfigPath = os.path.join(currentDir, "..", "config", f"{self.qq}.json")
+            with open(qqConfigPath, "r", encoding="utf-8") as f:
+                qqConfig = json.load(f)
+                self.logger.info(f"加载配置文件: {qqConfigPath}")
+                # 合并配置，覆盖 base 配置
+                config = {**config, **qqConfig}
+
+        self.config = config

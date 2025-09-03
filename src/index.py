@@ -12,16 +12,17 @@ def do_task(game: Game):
     app = Application(backend="uia").connect(handle=game.hwnd)
     game.count_position(app)
     # game.Bianqiang.liehun()
-    game.Fuben.zhengzhan()
+    # game.Fuben.zhengzhan(20)
+    game.Zhanzheng.juyi(1)
 
 
 def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(263144, "2548918215"),
-        Game(524878, "2468659059"),
-        Game(1836096, "3305194332"),
+        Game(328258, "2548918215"),
+        Game(1180458, "2468659059"),
+        Game(262784, "3305194332"),
     ]
 
     for game in games:
@@ -71,6 +72,7 @@ def main(mode="single"):
 if __name__ == "__main__":
     try:
         main()
+        # main("more")
         while True:
             time.sleep(5)
             check_process()
@@ -79,6 +81,6 @@ if __name__ == "__main__":
             # time.sleep(60)
 
     except KeyboardInterrupt:
-        print("\n程序已退出")
+        print("\n程序已手动退出")
     except Exception as e:
         print("index.py | 未知错误:", e)

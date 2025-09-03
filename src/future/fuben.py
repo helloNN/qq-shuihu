@@ -7,10 +7,12 @@ from utils.util import Util
 class Fuben:
     util: Util = None
     logger = None
+    config = {}
 
-    def __init__(self, util):
+    def __init__(self, util, config):
         self.util = util
         self.logger = util.logger
+        self.config = config
 
     def zhengzhan(self, time=5):
         """

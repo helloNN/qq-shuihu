@@ -7,10 +7,12 @@ from utils.util import Util
 class Bianqiang:
     util: Util = None
     logger = None
+    config = {}
 
-    def __init__(self, util):
+    def __init__(self, util, config):
         self.util = util
         self.logger = util.logger
+        self.config = config
 
     def liehun(self, time=20):
         """
