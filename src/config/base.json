@@ -1,8 +1,9 @@
 {
   "战争": {
     "聚义": {
-      "position": [3, 2],
-      "time": 1
+      "position": [2, 2],
+      "time": 5,
+      "stop": false
     }
   }
 }

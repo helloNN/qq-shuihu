@@ -20,9 +20,9 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(328258, "2548918215"),
-        Game(1180458, "2468659059"),
-        Game(262784, "3305194332"),
+        Game(263412, "2548918215"),
+        Game(460102, "2468659059"),
+        Game(198074, "3305194332"),
     ]
 
     for game in games:
@@ -34,6 +34,7 @@ def more_task():
             p.daemon = True
             # 启动进程
             p.start()
+            time.sleep(1)  # 避免同时操作一个号
         except Exception as e:
             print(f"index.py | {game.qq} | 任务错误:", e)
 
@@ -71,8 +72,8 @@ def main(mode="single"):
 
 if __name__ == "__main__":
     try:
-        main()
-        # main("more")
+        # main()
+        main("more")
         while True:
             time.sleep(5)
             check_process()

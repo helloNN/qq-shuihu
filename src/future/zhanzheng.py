@@ -21,14 +21,20 @@ class Zhanzheng:
         参数:
         time: 聚义次数, 默认5次
         """
-        self.logger.info(f"聚义开始, 预计次数: {time}")
-        print(f"聚义开始, 预计次数: {time}")
         startTime = TM.time()
         realTime = 0
 
         option = self.config.get("聚义", {})
         position = option.get("position", [])
         count = option.get("time", time)
+        stop = option.get("stop", False)
+
+        self.logger.info(f"聚义开始, 预计次数: {count}")
+        print(f"聚义开始, 预计次数: {count}")
+
+        if stop:
+            self.logger.info("聚义已关闭, 跳过")
+            return
 
         if len(position) != 2:
             self.logger.error("聚义坐标配置错误, 请检查配置文件")
@@ -45,13 +51,13 @@ class Zhanzheng:
                 self.util.click(position)
                 TM.sleep(1.5)
                 self.util.click(掠夺)
-                TM.sleep(1.5)
+                TM.sleep(1)
                 self.util.click(确定)
-                TM.sleep(4)
+                TM.sleep(1.5)
                 self.util.click(战斗结束)
-                TM.sleep(3)
+                TM.sleep(3.5)
                 self.util.click(关闭)
-                TM.sleep(2)
+                TM.sleep(3.5)
 
                 realTime += 1
                 print(f"当前已聚义: {realTime} 次", end="\r")
