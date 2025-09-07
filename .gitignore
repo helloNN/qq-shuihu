@@ -2,3 +2,4 @@ __pycache__
 .venv
 *.egg-info
 logs/*.log
+src/config/[0-9]*.json

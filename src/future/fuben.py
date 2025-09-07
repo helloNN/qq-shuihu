@@ -33,7 +33,7 @@ class Fuben:
 
             for i in times:
                 self.util.click(战斗结束)
-                TM.sleep(3)
+                TM.sleep(2.5)
 
                 self.util.click(再战)
                 realTime += 1
