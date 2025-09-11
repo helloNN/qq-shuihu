@@ -24,9 +24,11 @@ class Fuben:
         time: 征战次数, 默认5次
         """
         self.logger.info(f"征战开始, 预计次数: {time}")
-        print(f"征战开始, 预计次数: {time}")
+        print(f"征战开始")
         startTime = TM.time()
         realTime = 0
+
+        printStr = f"{self.qq} | " if self.qq else ""
 
         with self._zhengzhan():
             times = (x for x in range(time))
@@ -39,7 +41,9 @@ class Fuben:
 
                 self.util.click(再战)
                 realTime += 1
-                print(f"当前已征战: {realTime} 次", end="\r")
+                print(
+                    f"{printStr}当前已征战: {realTime} 次 | 预计次数: {time}", end="\r"
+                )
                 TM.sleep(1)
 
         self.logger.info(

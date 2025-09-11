@@ -115,11 +115,16 @@ class Game:
             self.logger.info(f"加载配置文件: {baseConfigPath}")
 
         if self.qq:
-            qqConfigPath = os.path.join(currentDir, "..", "config", f"{self.qq}.json")
-            with open(qqConfigPath, "r", encoding="utf-8") as f:
-                qqConfig = json.load(f)
-                self.logger.info(f"加载配置文件: {qqConfigPath}")
-                # 合并配置，覆盖 base 配置
-                config = {**config, **qqConfig}
+            try:
+                qqConfigPath = os.path.join(
+                    currentDir, "..", "config", f"{self.qq}.json"
+                )
+                with open(qqConfigPath, "r", encoding="utf-8") as f:
+                    qqConfig = json.load(f)
+                    self.logger.info(f"加载配置文件: {qqConfigPath}")
+                    # 合并配置，覆盖 base 配置
+                    config = {**config, **qqConfig}
+            except FileNotFoundError:
+                self.logger.warning(f"未找到配置文件: {qqConfigPath}, 使用默认配置")
 
         self.config = config
