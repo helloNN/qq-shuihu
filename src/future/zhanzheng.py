@@ -8,11 +8,13 @@ class Zhanzheng:
     util: Util = None
     logger = None
     config = {}
+    qq = ""
 
-    def __init__(self, util, config):
+    def __init__(self, util, config, qq):
         self.util = util
         self.logger = util.logger
         self.config = config
+        self.qq = qq
 
     def juyi(self, time=5):
         """
@@ -30,7 +32,6 @@ class Zhanzheng:
         stop = option.get("stop", False)
 
         self.logger.info(f"聚义开始, 预计次数: {count}")
-        print(f"聚义开始, 预计次数: {count}")
 
         if stop:
             self.logger.info("聚义已关闭, 跳过")
@@ -41,8 +42,9 @@ class Zhanzheng:
             return
 
         position = ("聚义攻打位置", *self._calculate_juyi_position(position))
-        print("option:", option)
-        print("position:", position)
+
+        printStr = f'{self.qq} | {tuple(option.get("position")) } | ' if self.qq else ""
+        print(f'聚义准备开始攻打: {tuple(option.get("position"))}')
 
         with self._juyi():
             times = (x for x in range(count))
@@ -60,7 +62,11 @@ class Zhanzheng:
                 TM.sleep(3.5)
 
                 realTime += 1
-                print(f"当前已聚义: {realTime} 次", end="\r")
+
+                print(
+                    f"{printStr} 当前已聚义: {realTime} 次 | 预计次数: {count}",
+                    end="\r",
+                )
 
         self.logger.info(
             f"聚义结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"

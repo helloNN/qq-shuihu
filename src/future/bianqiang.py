@@ -8,11 +8,13 @@ class Bianqiang:
     util: Util = None
     logger = None
     config = {}
+    qq = ""
 
-    def __init__(self, util, config):
+    def __init__(self, util, config, qq):
         self.util = util
         self.logger = util.logger
         self.config = config
+        self.qq = qq
 
     def liehun(self, time=20):
         """

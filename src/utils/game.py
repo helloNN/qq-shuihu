@@ -58,9 +58,9 @@ class Game:
         self.util = util
 
         # 挂载功能
-        self.Bianqiang = Bianqiang(util, self.config.get("变强", {}))
-        self.Fuben = Fuben(util, self.config.get("副本", {}))
-        self.Zhanzheng = Zhanzheng(util, self.config.get("战争", {}))
+        self.Bianqiang = Bianqiang(util, self.config.get("变强", {}), self.qq)
+        self.Fuben = Fuben(util, self.config.get("副本", {}), self.qq)
+        self.Zhanzheng = Zhanzheng(util, self.config.get("战争", {}), self.qq)
 
     def set_hwnd(self, hwnd: int):
         """设置窗口句柄"""
