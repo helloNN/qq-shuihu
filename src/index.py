@@ -12,17 +12,17 @@ def do_task(game: Game):
     app = Application(backend="uia").connect(handle=game.hwnd)
     game.count_position(app)
     # game.Bianqiang.liehun()
-    # game.Fuben.zhengzhan(20)
-    game.Zhanzheng.juyi(1)
+    game.Fuben.zhengzhan(20)
+    # game.Zhanzheng.juyi(1)
 
 
 def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(459940, "2548918215"),
-        Game(591106, "2468659059"),
-        Game(591424, "3305194332"),
+        Game(197720, "2548918215"),
+        Game(132258, "2468659059"),
+        Game(132296, "3305194332"),
     ]
 
     for game in games:
