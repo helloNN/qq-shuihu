@@ -20,9 +20,9 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(197720, "2548918215"),
-        Game(132258, "2468659059"),
-        Game(132296, "3305194332"),
+        Game(328286, "2548918215"),
+        Game(197784, "2468659059"),
+        Game(197770, "3305194332"),
     ]
 
     for game in games:
