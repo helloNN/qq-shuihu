@@ -83,7 +83,9 @@ class Game:
 
         flashArea = mainWindow["Custom4"]
         flashAreaRect = flashArea.rectangle()
-        self.logger.info(f"flash窗口: {flashAreaRect}")
+        self.logger.info(
+            f"flash窗口: {flashAreaRect} | width:{flashAreaRect.right - flashAreaRect.left}、height:{flashAreaRect.bottom - flashAreaRect.top}"
+        )
 
         self.coordDiff = (
             flashAreaRect.left - contactAreaRect.left,
