@@ -81,7 +81,12 @@ class Game:
         contactAreaRect = contactArea.rectangle()
         self.logger.info(f"联系官方窗口: {contactAreaRect}")
 
-        flashArea = mainWindow["Custom4"]
+        # 获取战斗信息的前一个元素（flash窗口）
+        fightInfo = mainWindow.child_window(title="战斗信息", control_type="Hyperlink")
+        flashArea = self.getFlashDom(fightInfo)
+        if not flashArea:
+            self.logger.error("未找到flash区域")
+            return
         flashAreaRect = flashArea.rectangle()
         self.logger.info(
             f"flash窗口: {flashAreaRect} | width:{flashAreaRect.right - flashAreaRect.left}、height:{flashAreaRect.bottom - flashAreaRect.top}"
@@ -95,6 +100,18 @@ class Game:
         self.logger.info(f"flash窗口到联系官方窗口位置偏移: {self.coordDiff}")
         # 挂载功能
         self._mountFuture()
+
+    def getFlashDom(self, element):
+        """获取falsh窗口"""
+        listItem = element.parent()
+        pp = listItem.parent()
+        siblings = pp.children()
+
+        try:
+            current_idx = siblings.index(listItem)
+            return siblings[current_idx - 1] if current_idx > 0 else None
+        except ValueError:
+            return None
 
     def click_lt(self, coord):
         """鼠标左键点击"""
