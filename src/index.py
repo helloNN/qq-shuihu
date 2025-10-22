@@ -11,18 +11,20 @@ processList = []
 def do_task(game: Game):
     app = Application(backend="uia").connect(handle=game.hwnd)
     game.count_position(app)
-    # game.Bianqiang.liehun()
-    game.Fuben.zhengzhan(2)
+    # game.Bianqiang.liehun(200)
+    game.Fuben.zhengzhan(20)
     # game.Zhanzheng.juyi(1)
+
+    # game.click_more(("天机秘籍", 670, 380), 100)
 
 
 def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(132228, "2548918215"),
-        Game(197778, "2468659059"),
-        Game(394406, "3305194332"),
+        Game(788320, "2548918215"),
+        Game(197426, "2468659059"),
+        Game(657086, "3305194332"),
     ]
 
     for game in games:
@@ -72,8 +74,8 @@ def main(mode="single"):
 
 if __name__ == "__main__":
     try:
-        main()
-        # main("more")
+        # main()
+        main("more")
         while True:
             time.sleep(5)
             check_process()

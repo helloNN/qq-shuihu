@@ -1,8 +1,10 @@
 import logging
 import json
 import os
+import time
 from .util import Util
 from future import Bianqiang, Fuben, Zhanzheng
+
 
 logging.basicConfig(
     filename="logs/game.log",
@@ -114,12 +116,17 @@ class Game:
             return None
 
     def click_lt(self, coord):
-        """鼠标左键点击"""
+        """
+        鼠标左键点击
+
+        参数:\n
+        coord: 坐标, 比如: ("天机秘籍", 670, 380)
+        """
         Util.bg_click(
             {
                 "hwnd": self.hwnd,
-                "x": coord[1] + self.coordDiff[0],
-                "y": coord[2] + self.coordDiff[1],
+                "name": coord[0],
+                "coord": (coord[1] + self.coordDiff[0], coord[2] + self.coordDiff[1]),
                 "logger": self.logger,
             }
         )
@@ -147,3 +154,20 @@ class Game:
                 self.logger.warning(f"未找到配置文件: {qqConfigPath}, 使用默认配置")
 
         self.config = config
+
+    def click_more(self, coord, times=10, interval=0.8):
+        """
+        连点器
+
+        参数:\n
+        coord: 坐标\n
+        times: 点击次数, 默认10次\n
+        interval: 时间间隔，默认1s
+        """
+        printStr = self.qq + " | " if self.qq else ""
+        for i in range(times):
+            self.click_lt(coord)
+
+            print(f"{printStr}当前已连点: {i+1} 次 | 预计次数: {times}", end="\r")
+            time.sleep(interval)
+        print("")

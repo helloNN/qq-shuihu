@@ -33,6 +33,7 @@ class Util:
         """
         后台左键单机
         """
+        # print("info:", info)
         info["logger"].info(
             f"{info['hwnd']} | 后台点击: {info['name']} {info['coord']})"
         )
