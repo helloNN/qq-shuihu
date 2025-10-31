@@ -3,7 +3,7 @@ import json
 import os
 import time
 from .util import Util
-from future import Bianqiang, Fuben, Zhanzheng
+from future import Bianqiang, Fuben, Zhanzheng, Other
 
 
 logging.basicConfig(
@@ -63,6 +63,7 @@ class Game:
         self.Bianqiang = Bianqiang(util, self.config.get("变强", {}), self.qq)
         self.Fuben = Fuben(util, self.config.get("副本", {}), self.qq)
         self.Zhanzheng = Zhanzheng(util, self.config.get("战争", {}), self.qq)
+        self.Other = Other(util, self.config.get("其它", {}), self.qq)
 
     def set_hwnd(self, hwnd: int):
         """设置窗口句柄"""
