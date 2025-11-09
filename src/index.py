@@ -13,8 +13,9 @@ def do_task(game: Game):
     game.count_position(app)
     # game.Bianqiang.liehun(30)
     # game.Fuben.zhengzhan(20)
-    # game.Zhanzheng.juyi(1)
-    game.Other.xiShuXing(100)
+    # game.Zhanzheng.juyi()
+    # game.Other.xiShuXing(100)
+    game.Other.xiShuXing2()
 
     # game.click_more(("天机秘籍", 670, 380), 100)
 
@@ -23,9 +24,9 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(524894, "2548918215"),
-        Game(132288, "2468659059"),
-        Game(197858, "3305194332"),
+        Game(197810, "2548918215"),
+        Game(132338, "2468659059"),
+        Game(197888, "3305194332"),
     ]
 
     for game in games:
