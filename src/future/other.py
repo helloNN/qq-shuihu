@@ -43,7 +43,7 @@ class Other:
         self.logger.info(result)
         print(result)
 
-    def xiShuXing2(self, time=300):
+    def xiShuXing2(self, time=3000):
         """
         洗属性【一次一次洗】
 
@@ -61,7 +61,7 @@ class Other:
             self.util.click(确定_洗属性)
             realTime += 1
             print(f"{printStr}当前已洗属性: {realTime} 次 | 预计次数: {time}", end="\r")
-            TM.sleep(30 if realTime % 30 == 0 else 1)
+            TM.sleep(1)
 
         result = f"洗属性2结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"
         self.logger.info(result)
