@@ -19,7 +19,7 @@ def do_task(game: Game, order_num: int):
     # game.Other.xiShuXing2()
 
     # 集市只能跑 2个， 启动程序耗时 2.5s - 3s,  59s的时候跑！
-    # game.Other.jiShi()
+    game.Other.jiShi()
 
     # game.click_more(("天机秘籍", 670, 380), 100)
 
@@ -60,7 +60,7 @@ def single_task():
     game.set_hwnd(hwnd)
 
     # 2.执行操作
-    do_task(game)
+    do_task(game, 0)
 
 
 # 是否还有进程在处理任务
@@ -81,10 +81,9 @@ def main(mode="single"):
 
 
 if __name__ == "__main__":
-    print(f"开始时间: {time.time()}")
     try:
-        # main()
-        main("more")
+        main()
+        # main("more")
         while True:
             time.sleep(5)
             check_process()
