@@ -67,7 +67,7 @@ class Other:
         self.logger.info(result)
         print(result)
 
-    def jiShi(self):
+    def jiShi(self, done=True):
         """
         集市
         """
@@ -88,5 +88,7 @@ class Other:
         self.util.click((f"商队{商队}", 270 + 190 * (商队 - 1), 170))
         TM.sleep(0.1)
         self.util.click((f"货品数量最大", 688, 265))
-        TM.sleep(0.1)
-        self.util.click((f"开始跑商", 500, 415))
+
+        if done:
+            TM.sleep(0.1)
+            self.util.click((f"开始跑商", 500, 415))
