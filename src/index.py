@@ -8,14 +8,18 @@ import time
 processList = []
 
 
-def do_task(game: Game):
+def do_task(game: Game, order_num: int):
     app = Application(backend="uia").connect(handle=game.hwnd)
     game.count_position(app)
+
     # game.Bianqiang.liehun(30)
     # game.Fuben.zhengzhan(21)
-    game.Zhanzheng.juyi()
+    # game.Zhanzheng.juyi(order_num)
     # game.Other.xiShuXing(100)
     # game.Other.xiShuXing2()
+
+    # 集市只能跑 2个， 启动程序耗时 2.5s - 3s,  59s的时候跑！
+    # game.Other.jiShi()
 
     # game.click_more(("天机秘籍", 670, 380), 100)
 
@@ -24,23 +28,25 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(66818, "2548918215"),
-        Game(132386, "2468659059"),
-        Game(197908, "3305194332"),
+        Game(66870, "2548918215"),
+        Game(132460, "2468659059"),
+        Game(197986, "3305194332"),
     ]
+
+    current_index = 0
 
     for game in games:
         try:
             # 创建进程
-            p = multiprocessing.Process(target=do_task, args=(game,))
+            p = multiprocessing.Process(target=do_task, args=(game, current_index))
             processList.append(p)
             # 设置为守护进程，主进程结束，子进程也结束
             p.daemon = True
             # 启动进程
             p.start()
-            time.sleep(1)  # 避免同时操作一个号
         except Exception as e:
             print(f"index.py | {game.qq} | 任务错误:", e)
+        current_index += 1
 
 
 def single_task():
@@ -75,6 +81,7 @@ def main(mode="single"):
 
 
 if __name__ == "__main__":
+    print(f"开始时间: {time.time()}")
     try:
         # main()
         main("more")

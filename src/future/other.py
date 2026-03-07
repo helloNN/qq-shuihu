@@ -66,3 +66,27 @@ class Other:
         result = f"洗属性2结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"
         self.logger.info(result)
         print(result)
+
+    def jiShi(self):
+        """
+        集市
+        """
+        集市 = self.config.get("集市")
+        城市 = 集市.get("城市")
+        商队 = 集市.get("商队")
+        商品顺序 = 集市.get("商品顺序")
+
+        city = {1: "汴京", 2: "洛阳", 3: "扬州", 4: "苏州", 5: "临安", 6: "泉州"}
+
+        self.logger.info(f"在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个")
+        print(f"在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个")
+
+        self.util.click((f"{city[城市]}", 200 + 103 * (城市 - 1), 100))
+        TM.sleep(0.2)
+        self.util.click((f"商品{商品顺序}", 470, 230 + 40 * (商品顺序 - 1)))
+        TM.sleep(0.1)
+        self.util.click((f"商队{商队}", 270 + 190 * (商队 - 1), 170))
+        TM.sleep(0.1)
+        self.util.click((f"货品数量最大", 688, 265))
+        TM.sleep(0.1)
+        self.util.click((f"开始跑商", 500, 415))

@@ -16,19 +16,21 @@ class Zhanzheng:
         self.config = config
         self.qq = qq
 
-    def juyi(self, time=5):
+    def juyi(self, sleep_time: int = 0):
         """
         聚义
 
         参数:
-        time: 聚义次数, 默认5次
+        sleep_time: 等待时间
         """
+        TM.sleep(sleep_time)
+
         startTime = TM.time()
         realTime = 0
 
         option = self.config.get("聚义", {})
         position = option.get("position", [])
-        count = option.get("time", time)
+        count = option.get("time", 5)
         stop = option.get("stop", False)
 
         self.logger.info(f"聚义开始, 预计次数: {count}")
