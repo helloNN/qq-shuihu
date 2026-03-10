@@ -71,6 +71,8 @@ class Other:
         """
         集市
         """
+        start_time = TM.time()
+
         集市 = self.config.get("集市")
         城市 = 集市.get("城市")
         商队 = 集市.get("商队")
@@ -79,9 +81,6 @@ class Other:
         city = {1: "汴京", 2: "洛阳", 3: "扬州", 4: "苏州", 5: "临安", 6: "泉州"}
 
         self.logger.info(f"在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个")
-        print(
-            " | ".join([self.qq, f"在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个"])
-        )
 
         self.util.click((f"{city[城市]}", 200 + 103 * (城市 - 1), 100))
         TM.sleep(0.2)
@@ -94,3 +93,7 @@ class Other:
         if done:
             TM.sleep(0.1)
             self.util.click((f"开始跑商", 500, 415))
+
+        print(
+            f"在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个, 耗时:{round(TM.time() - start_time, 2)}"
+        )

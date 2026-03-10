@@ -25,7 +25,7 @@ def do_task(game: Game, order_num: int):
 
     # 集市只能跑 2个， 启动程序耗时 2.5s - 3s,  59s的时候跑！
     # 10:06 跑目前看，可以拿到满
-    game.Other.jiShi(False)
+    game.Other.jiShi()
 
     # game.click_more(("天机秘籍", 670, 380), 100)
 
@@ -34,9 +34,9 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(460486, "2548918215"),
-        Game(329438, "2468659059"),
-        Game(264710, "3305194332"),
+        Game(198252, "2548918215"),
+        Game(132886, "2468659059"),
+        Game(198434, "3305194332"),
     ]
 
     current_index = 0
@@ -88,8 +88,8 @@ def main(mode="single"):
 
 if __name__ == "__main__":
     try:
-        # main()
-        main("more")
+        main()
+        # main("more")
         while True:
             time.sleep(5)
             check_process()
