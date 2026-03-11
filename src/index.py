@@ -13,6 +13,7 @@ time_start = time.time()
 def do_task(game: Game, order_num: int):
     app = Application(backend="uia").connect(handle=game.hwnd)
     game.count_position(app)
+
     print(
         " | ".join([game.qq, f"程序初始化耗时: {round(time.time() - time_start, 2)}s"])
     )
@@ -24,7 +25,6 @@ def do_task(game: Game, order_num: int):
     # game.Other.xiShuXing2()
 
     # 集市只能跑 2个， 启动程序耗时 2.5s - 3s,  59s的时候跑！
-    # 10:06 跑目前看，可以拿到满
     game.Other.jiShi()
 
     # game.click_more(("天机秘籍", 670, 380), 100)
@@ -34,14 +34,22 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(198252, "2548918215"),
-        Game(132886, "2468659059"),
-        Game(198434, "3305194332"),
+        Game(131594, "2548918215"),
+        Game(329620, "2468659059"),
+        Game(329604, "3305194332"),
     ]
+
+    # 只计算第一个实例的位置，其它实例共用位置
+    app1 = Application(backend="uia").connect(handle=games[0].hwnd)
+    games[0].count_position(app1)
 
     current_index = 0
 
     for game in games:
+        # 使用第一个实例的位置
+        if current_index != 0:
+            game.coordDiff = games[0].coordDiff
+
         try:
             # 创建进程
             p = multiprocessing.Process(target=do_task, args=(game, current_index))
@@ -88,8 +96,8 @@ def main(mode="single"):
 
 if __name__ == "__main__":
     try:
-        main()
-        # main("more")
+        # main()
+        main("more")
         while True:
             time.sleep(5)
             check_process()

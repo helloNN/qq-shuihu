@@ -70,9 +70,15 @@ class Game:
         self.hwnd = hwnd
 
     def count_position(self, app):
-        """计算窗口位置，并挂载功能"""
-        print(f"{self.qq + ':' if self.qq else ''}计算窗口位置")
+        """
+        计算窗口位置，并挂载功能(比较耗时)
+        """
+        if self.coordDiff[0] != 0 and self.coordDiff[1] != 0:
+            # 挂载功能
+            self._mountFuture()
+            return
 
+        print(f"{self.qq + ':' if self.qq else ''}计算窗口位置")
         mainWindow = app.MainWindow
         mainWindowRect = mainWindow.rectangle()
         self.logger.info(f"mainWindow窗口: {mainWindowRect}")
