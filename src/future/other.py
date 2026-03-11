@@ -95,5 +95,5 @@ class Other:
             self.util.click((f"开始跑商", 500, 415))
 
         print(
-            f"在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个, 耗时:{round(TM.time() - start_time, 2)}"
+            f"{self.qq}在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个, 耗时:{round(TM.time() - start_time, 2)}"
         )
