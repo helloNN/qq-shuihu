@@ -7,15 +7,20 @@ import time
 # 进程列表
 processList = []
 
-time_start = time.time()
 
-
-def do_task(game: Game, order_num: int):
+def do_task(game: Game, order_num: int, setup_time: int = 0):
+    time_start = time.time()
     app = Application(backend="uia").connect(handle=game.hwnd)
     game.count_position(app)
+    setup_time2 = time.time() - time_start
 
     print(
-        " | ".join([game.qq, f"程序初始化耗时: {round(time.time() - time_start, 2)}s"])
+        " | ".join(
+            [
+                game.qq,
+                f"程序初始化耗时: {round(setup_time if setup_time>0 else setup_time2, 2)}s",
+            ]
+        )
     )
 
     # game.Bianqiang.liehun(30)
@@ -34,14 +39,16 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(526078, "2548918215"),
-        Game(460238, "2468659059"),
-        Game(919254, "3305194332"),
+        Game(198096, "2548918215"),
+        Game(132596, "2468659059"),
+        Game(656888, "3305194332"),
     ]
 
     # 只计算第一个实例的位置，其它实例共用位置
+    time_start = time.time()
     app1 = Application(backend="uia").connect(handle=games[0].hwnd)
     games[0].count_position(app1)
+    setup_time = time.time() - time_start
 
     current_index = 0
 
@@ -52,7 +59,9 @@ def more_task():
 
         try:
             # 创建进程
-            p = multiprocessing.Process(target=do_task, args=(game, current_index))
+            p = multiprocessing.Process(
+                target=do_task, args=(game, current_index, setup_time)
+            )
             processList.append(p)
             # 设置为守护进程，主进程结束，子进程也结束
             p.daemon = True

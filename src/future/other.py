@@ -77,6 +77,9 @@ class Other:
         城市 = 集市.get("城市")
         商队 = 集市.get("商队")
         商品顺序 = 集市.get("商品顺序")
+        stop = 集市.get("stop")
+        if stop:
+            return
 
         city = {1: "汴京", 2: "洛阳", 3: "扬州", 4: "苏州", 5: "临安", 6: "泉州"}
 
@@ -95,5 +98,5 @@ class Other:
             self.util.click((f"开始跑商", 500, 415))
 
         print(
-            f"{self.qq}在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个, 耗时:{round(TM.time() - start_time, 2)}"
+            f"{self.qq}在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个, 耗时:{round(TM.time() - start_time, 2)}s"
         )
