@@ -29,19 +29,21 @@ def do_task(game: Game, order_num: int, setup_time: int = 0):
     # game.Other.xiShuXing(100)
     # game.Other.xiShuXing2()
 
-    # 集市只能跑 2个， 启动程序耗时 2.5s - 3s,  59s的时候跑！
-    game.Other.jiShi()
+    # 集市只能跑 2个， 启动程序耗时 1.8s - 3s,  59s的时候跑！
+    # game.Other.jiShi()
 
     # game.click_more(("天机秘籍", 670, 380), 100)
+
+    game.Test.test_write(("请输入道具名称", 596, 120), 1000)
 
 
 def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(198096, "2548918215"),
-        Game(132596, "2468659059"),
-        Game(656888, "3305194332"),
+        Game(132282, "2548918215"),
+        Game(66874, "2468659059"),
+        Game(66890, "3305194332"),
     ]
 
     # 只计算第一个实例的位置，其它实例共用位置
@@ -105,8 +107,8 @@ def main(mode="single"):
 
 if __name__ == "__main__":
     try:
-        # main()
-        main("more")
+        main()
+        # main("more")
         while True:
             time.sleep(5)
             check_process()
