@@ -46,14 +46,19 @@ class ZuDui:
                 TM.sleep(3)
 
                 self.util.click(加入指定队伍)
-                TM.sleep(0.5 + order_num * 1.1)
+
+                TM.sleep(0.5 + (order_num - 1) * 2.5)
                 self.util.type_content(输入队伍ID_输入框, 队伍ID)
-                TM.sleep(0.2)
+
+                TM.sleep(0.5)
                 self.util.click(加入队伍)
 
-            self.logger.info(f"神困副本当前已开: {i}次 | 预计次数: {times}次")
+            self.logger.info(
+                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次"
+            )
             print(
-                f"神困副本当前已开: {i}次 | 预计次数: {times}次 | 等待7分钟", end="\r"
+                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次 | 等待7分钟",
+                end="\r",
             )
 
             TM.sleep(7 * 60)
