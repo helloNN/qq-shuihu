@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 from coords.zudui import *
 import time as TM
+from datetime import datetime
 from utils.util import Util
 
 
@@ -47,7 +48,7 @@ class ZuDui:
 
                 self.util.click(加入指定队伍)
 
-                TM.sleep(0.5 + (order_num - 1) * 2.5)
+                TM.sleep(0.5 + (order_num - 1) * 3)
                 self.util.type_content(输入队伍ID_输入框, 队伍ID)
 
                 TM.sleep(0.5)
@@ -57,7 +58,7 @@ class ZuDui:
                 f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次"
             )
             print(
-                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次 | 等待7分钟",
+                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次 | {datetime.now()}(等待7分钟)",
                 end="\r",
             )
 
