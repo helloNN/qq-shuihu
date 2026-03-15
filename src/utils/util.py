@@ -94,22 +94,22 @@ class Util:
         try:
             # 1. 后台点击获取焦点
             cls.bg_click(info)
-            time.sleep(0.1)
+            time.sleep(0.2)
 
             # 2. 转换数字为字符串，发送WM_CHAR消息
             number_str = str(number)
             info["logger"].info(f"{info['hwnd']} | 后台输入内容: {number_str}")
-            print(f"{info['hwnd']} | 后台输入内容: {number_str}")
+            # print(f"{info['hwnd']} | 后台输入内容: {number_str}")
 
             for char in number_str:
                 # 获取字符的ASCII码（WM_CHAR使用ASCII码，而非虚拟键码）
                 char_ascii = ord(char)
                 # 发送字符输入消息（核心：WM_CHAR）
                 win32api.SendMessage(info["hwnd"], win32con.WM_CHAR, char_ascii, 0)
-                time.sleep(0.03)  # Flash响应较慢，增加间隔
+                time.sleep(0.05)  # Flash响应较慢，增加间隔
 
             info["logger"].info(f"{info['hwnd']} | 后台输入内容完毕: {number_str}")
-            print(f"{info['hwnd']} | 后台输入内容完毕: {number_str}")
+            # print(f"{info['hwnd']} | 后台输入内容完毕: {number_str}")
         except Exception as e:
             info["logger"].error(f"WM_CHAR输入失败: {e}")
             raise
