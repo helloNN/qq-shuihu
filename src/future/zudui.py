@@ -62,7 +62,7 @@ class ZuDui:
                 end="\r",
             )
 
-            TM.sleep(7 * 60)
+            TM.sleep(7 * 60 + 10)
             self.util.click(通关成功_确定)
             TM.sleep(0.3)
             self.util.click(副本通关奖励)
