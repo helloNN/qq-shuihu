@@ -60,6 +60,6 @@ class ZuDui:
             self.util.click(通关成功_确定)
             TM.sleep(0.3)
             self.util.click(副本通关奖励)
-            TM.sleep(0.8)
+            TM.sleep(0.5)
             self.util.click(消耗罗汉珠_确定)
             TM.sleep(0.5)
