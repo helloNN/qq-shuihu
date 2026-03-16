@@ -58,11 +58,11 @@ class ZuDui:
                 f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次"
             )
             print(
-                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次 | {datetime.now()}(等待7分钟)",
+                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次 | 从{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}开始, 等待7分钟",
                 end="\r",
             )
 
-            TM.sleep(7 * 60 + 10)
+            TM.sleep(7 * 60 + 3)
             self.util.click(通关成功_确定)
             TM.sleep(0.3)
             self.util.click(副本通关奖励)
