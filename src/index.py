@@ -26,7 +26,7 @@ def do_task(game: Game, order_num: int, setup_time: int = 0):
     # game.Bianqiang.liehun()
     # game.Fuben.zhengzhan(21)
     # game.Zhanzheng.juyi(order_num)
-    # game.Other.xiShuXing(100)
+    # game.Other.xiShuXing(150)
     # game.Other.xiShuXing2()
     game.ZuDui.shenKun(order_num)
 
@@ -42,10 +42,10 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(460422, "2548918215"),
-        Game(591536, "2468659059"),
-        Game(460120, "3305194332"),
-        Game(460412, "2166311773"),
+        Game(66704, "2548918215"),
+        Game(66726, "2468659059"),
+        Game(132312, "3305194332"),
+        Game(131392, "2359546960"),
     ]
 
     # 只计算第一个实例的位置，其它实例共用位置

@@ -17,7 +17,7 @@ class ZuDui:
         self.config = config
         self.qq = qq
 
-    def shenKun(self, order_num, times: int = 1000):
+    def shenKun(self, order_num, times: int = 100):
         """
         神困副本
         :param order_num
@@ -62,7 +62,10 @@ class ZuDui:
                 end="\r",
             )
 
-            TM.sleep(7 * 60 + 3)
+            # 用于解决: 组队的人点击过快
+            loop = i // 5
+            TM.sleep(7 * 60 + 10 + loop * 5)
+
             self.util.click(通关成功_确定)
             TM.sleep(0.3)
             self.util.click(副本通关奖励)
