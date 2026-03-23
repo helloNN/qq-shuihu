@@ -10,6 +10,7 @@ class Test:
     qq = ""
 
     def __init__(self, util, config, qq):
+        print(f"{qq} | logger-id: {id(util.logger)}")
         self.util = util
         self.logger = util.logger
         self.config = config
@@ -22,3 +23,8 @@ class Test:
         :param content 输入的内容
         """
         self.util.type_content(coord, content)
+
+    def test_log(self):
+        print(self.qq)
+
+        self.logger.info(self.qq)

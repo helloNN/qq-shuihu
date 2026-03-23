@@ -64,7 +64,7 @@ class ZuDui:
 
             # 用于解决: 组队的人点击过快
             loop = i // 5
-            TM.sleep(7 * 60 + 10 + loop * 5)
+            TM.sleep(7 * 60 + 10 + loop * 20)
 
             self.util.click(通关成功_确定)
             TM.sleep(0.3)
