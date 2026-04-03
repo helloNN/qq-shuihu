@@ -36,6 +36,7 @@ class Game:
             # 多任务则自定义日志
             self._cutomLogger()
         self.load_config()
+        self.logger.info(f"init完毕")
 
     def _cutomLogger(self):
         """自定义日志"""
@@ -180,3 +181,74 @@ class Game:
             print(f"{printStr}当前已连点: {i+1} 次 | 预计次数: {times}", end="\r")
             time.sleep(interval)
         print("")
+
+
+class Game2:
+    """游戏管理类"""
+
+    hwnd = None
+    qq = ""
+    logger = None
+    coordDiff = (0, 0)  # 位置偏移
+    util = None
+    Bianqiang = None
+    config = {}
+
+    def __init__(self, hwnd: int = None, qq=""):
+        """
+        hwnd: 窗口句柄
+        """
+        self.hwnd = hwnd
+        self.qq = qq
+        self.logger = logging.getLogger(f"Game-{self.qq or __name__}")
+        if qq:
+            # 多任务则自定义日志
+            self._cutomLogger()
+        self.load_config()
+        self.logger.info(f"init完毕 | {id(self.logger)}")
+
+    def _cutomLogger(self):
+        """自定义日志"""
+        log_filename = f"logs/{self.qq}.log"
+        handler_exists = any(
+            isinstance(h, logging.FileHandler) and h.baseFilename.endswith(log_filename)
+            for h in self.logger.handlers
+        )
+
+        if not handler_exists:
+            file_handler = logging.FileHandler(log_filename, encoding="utf-8")
+            file_handler.setLevel(logging.DEBUG)
+            formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
+            file_handler.setFormatter(formatter)
+            self.logger.addHandler(file_handler)
+            self.logger.propagate = False  # 不向上传播到根日志器
+
+        self.logger.info(f"日志游戏实例初始化")
+
+    def count_position(self, app):
+        self.logger.info(f"{self.qq} | {id(self.logger)} | count_position")
+        pass
+
+    def load_config(self):
+        """加载配置文件"""
+
+        currentDir = os.path.dirname(os.path.abspath(__file__))
+        baseConfigPath = os.path.join(currentDir, "..", "config", "base.json")
+        with open(baseConfigPath, "r", encoding="utf-8") as f:
+            config = json.load(f)
+            self.logger.info(f"加载配置文件: {baseConfigPath}")
+
+        if self.qq:
+            try:
+                qqConfigPath = os.path.join(
+                    currentDir, "..", "config", f"{self.qq}.json"
+                )
+                with open(qqConfigPath, "r", encoding="utf-8") as f:
+                    qqConfig = json.load(f)
+                    self.logger.info(f"加载配置文件: {qqConfigPath}")
+                    # 合并配置，覆盖 base 配置
+                    config = {**config, **qqConfig}
+            except FileNotFoundError:
+                self.logger.warning(f"未找到配置文件: {qqConfigPath}, 使用默认配置")
+
+        self.config = config

@@ -10,7 +10,6 @@ class Test:
     qq = ""
 
     def __init__(self, util, config, qq):
-        print(f"{qq} | logger-id: {id(util.logger)}")
         self.util = util
         self.logger = util.logger
         self.config = config
