@@ -88,7 +88,7 @@ class Other:
         self.util.click((f"{city[城市]}", 200 + 103 * (城市 - 1), 100))
         TM.sleep(0.2)
         self.util.click((f"商品{商品顺序}", 470, 230 + 40 * (商品顺序 - 1)))
-        TM.sleep(0.1)
+        TM.sleep(0.15)
         self.util.click((f"商队{商队}", 270 + 190 * (商队 - 1), 170))
         TM.sleep(0.1)
         self.util.click((f"货品数量最大", 688, 265))
