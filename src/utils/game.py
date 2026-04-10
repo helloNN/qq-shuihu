@@ -74,13 +74,28 @@ class Game:
 
     def count_position(self, app):
         """
-        计算窗口位置，并挂载功能(比较耗时)
+        计算窗口偏移值(coordDiff)比较耗时，并挂载功能
         """
+        cache_file = f"src/config/cache.json"
+
+        # 1.根据缓存来执行
+        use_cache = self.config.get("cache", True)
+        if use_cache:
+            with open(cache_file, encoding="utf-8") as f:
+                cached_json = json.load(f)
+                cached_coordDiff = cached_json.get("coordDiff")
+
+            if cached_coordDiff:
+                self.coordDiff = tuple(cached_coordDiff)
+                self._mountFuture()
+                return
+
+        # 2.自身有数据的时候不进行重复计算，因为耗时
         if self.coordDiff[0] != 0 and self.coordDiff[1] != 0:
-            # 挂载功能
             self._mountFuture()
             return
 
+        # 3.重新计算窗口偏移值
         print(f"{self.qq + ':' if self.qq else ''}计算窗口位置")
         mainWindow = app.MainWindow
         mainWindowRect = mainWindow.rectangle()
@@ -103,13 +118,18 @@ class Game:
         self.logger.info(
             f"flash窗口: {flashAreaRect} | width:{flashAreaRect.right - flashAreaRect.left}、height:{flashAreaRect.bottom - flashAreaRect.top}"
         )
-
+        # 得到偏移值
         self.coordDiff = (
             flashAreaRect.left - contactAreaRect.left,
             flashAreaRect.top - contactAreaRect.top,
         )
-
         self.logger.info(f"flash窗口到联系官方窗口位置偏移: {self.coordDiff}")
+        # 写入缓存
+        cached_json["coordDiff"] = self.coordDiff
+        with open(cache_file, "w", encoding="utf-8") as f:
+            json.dump(cached_json, f, ensure_ascii=False, indent=2)
+            print("coordDiff已写入缓存文件")
+
         # 挂载功能
         self._mountFuture()
 

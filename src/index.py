@@ -24,14 +24,14 @@ def do_task(game: Game, order_num: int, setup_time: int = 0):
     )
 
     # game.Bianqiang.liehun(500)
-    # game.Fuben.zhengzhan(80)
+    # game.Fuben.zhengzhan(21)
     # game.Zhanzheng.juyi(order_num)
     # game.Other.xiShuXing(150)
     # game.Other.xiShuXing2()
     # game.ZuDui.shenKun(order_num)
 
     # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
-    game.Other.jiShi()
+    # game.Other.jiShi()
 
     # game.click_more(("天机秘籍", 670, 380), 100)
 
@@ -46,9 +46,9 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(263512, "2548918215"),
-        Game(460092, "2468659059"),
-        Game(263654, "3305194332"),
+        Game(459472, "2548918215"),
+        Game(263674, "2468659059"),
+        Game(460136, "3305194332"),
         # Game(1247214, "2359546960"),
         # Game(460920, "3492175458"),
         # Game(329834, "3118728968"),
