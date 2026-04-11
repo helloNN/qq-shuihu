@@ -11,7 +11,7 @@ processList = []
 def do_task(game: Game, order_num: int, setup_time: int = 0):
     time_start = time.time()
     app = Application(backend="uia").connect(handle=game.hwnd)
-    game.count_position(app)
+    game.count_position(app, True)
     setup_time2 = time.time() - time_start
 
     print(

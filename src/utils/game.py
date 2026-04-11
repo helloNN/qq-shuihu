@@ -26,19 +26,15 @@ class Game:
     config = {}
 
     def __init__(self, hwnd: int = None, qq=""):
-        """
-        hwnd: 窗口句柄
+        """Game初始化
+
+        :param hwnd: 窗口句柄
+        :param qq:
         """
         self.hwnd = hwnd
         self.qq = qq
-        self.logger = logging.getLogger(f"Game-{self.qq or __name__}")
-        if qq:
-            # 多任务则自定义日志
-            self._cutomLogger()
-        self.load_config()
-        self.logger.info(f"init完毕")
 
-    def _cutomLogger(self):
+    def _customLogger(self):
         """自定义日志"""
         log_filename = f"logs/{self.qq}.log"
         handler_exists = any(
@@ -57,6 +53,12 @@ class Game:
         self.logger.info(f"{self.qq} | 日志游戏实例初始化")
 
     def _mountFuture(self):
+        """挂载功能模块"""
+        self.logger = logging.getLogger(f"Game-{self.qq or __name__}")
+        if self.qq:
+            self._customLogger()
+        self.load_config()
+
         util = Util(self.hwnd, self.coordDiff, self.logger)
         self.util = util
 
@@ -72,9 +74,12 @@ class Game:
         """设置窗口句柄"""
         self.hwnd = hwnd
 
-    def count_position(self, app):
-        """
-        计算窗口偏移值(coordDiff)比较耗时，并挂载功能
+    def count_position(self, app, auto_mount=False):
+        """计算窗口偏移值(coordDiff)，比较耗时，并挂载功能
+
+        :param app: pywinauto 实例
+        :param auto_mount: 自动挂载功能模块
+        :return none:
         """
         cache_file = f"src/config/cache.json"
 
@@ -87,11 +92,11 @@ class Game:
 
             if cached_coordDiff:
                 self.coordDiff = tuple(cached_coordDiff)
-                self._mountFuture()
+                auto_mount and self._mountFuture()
                 return
 
         # 2.自身有数据的时候不进行重复计算，因为耗时
-        if self.coordDiff[0] != 0 and self.coordDiff[1] != 0:
+        if self.coordDiff[0] != 0 and self.coordDiff[1] != 0 and auto_mount:
             self._mountFuture()
             return
 
@@ -131,7 +136,7 @@ class Game:
             print("coordDiff已写入缓存文件")
 
         # 挂载功能
-        self._mountFuture()
+        auto_mount and self._mountFuture()
 
     def getFlashDom(self, element):
         """获取falsh窗口"""
@@ -201,74 +206,3 @@ class Game:
             print(f"{printStr}当前已连点: {i+1} 次 | 预计次数: {times}", end="\r")
             time.sleep(interval)
         print("")
-
-
-class Game2:
-    """游戏管理类"""
-
-    hwnd = None
-    qq = ""
-    logger = None
-    coordDiff = (0, 0)  # 位置偏移
-    util = None
-    Bianqiang = None
-    config = {}
-
-    def __init__(self, hwnd: int = None, qq=""):
-        """
-        hwnd: 窗口句柄
-        """
-        self.hwnd = hwnd
-        self.qq = qq
-        self.logger = logging.getLogger(f"Game-{self.qq or __name__}")
-        if qq:
-            # 多任务则自定义日志
-            self._cutomLogger()
-        self.load_config()
-        self.logger.info(f"init完毕 | {id(self.logger)}")
-
-    def _cutomLogger(self):
-        """自定义日志"""
-        log_filename = f"logs/{self.qq}.log"
-        handler_exists = any(
-            isinstance(h, logging.FileHandler) and h.baseFilename.endswith(log_filename)
-            for h in self.logger.handlers
-        )
-
-        if not handler_exists:
-            file_handler = logging.FileHandler(log_filename, encoding="utf-8")
-            file_handler.setLevel(logging.DEBUG)
-            formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
-            file_handler.setFormatter(formatter)
-            self.logger.addHandler(file_handler)
-            self.logger.propagate = False  # 不向上传播到根日志器
-
-        self.logger.info(f"日志游戏实例初始化")
-
-    def count_position(self, app):
-        self.logger.info(f"{self.qq} | {id(self.logger)} | count_position")
-        pass
-
-    def load_config(self):
-        """加载配置文件"""
-
-        currentDir = os.path.dirname(os.path.abspath(__file__))
-        baseConfigPath = os.path.join(currentDir, "..", "config", "base.json")
-        with open(baseConfigPath, "r", encoding="utf-8") as f:
-            config = json.load(f)
-            self.logger.info(f"加载配置文件: {baseConfigPath}")
-
-        if self.qq:
-            try:
-                qqConfigPath = os.path.join(
-                    currentDir, "..", "config", f"{self.qq}.json"
-                )
-                with open(qqConfigPath, "r", encoding="utf-8") as f:
-                    qqConfig = json.load(f)
-                    self.logger.info(f"加载配置文件: {qqConfigPath}")
-                    # 合并配置，覆盖 base 配置
-                    config = {**config, **qqConfig}
-            except FileNotFoundError:
-                self.logger.warning(f"未找到配置文件: {qqConfigPath}, 使用默认配置")
-
-        self.config = config

@@ -24,6 +24,4 @@ class Test:
         self.util.type_content(coord, content)
 
     def test_log(self):
-        print(self.qq)
-
         self.logger.info(self.qq)
