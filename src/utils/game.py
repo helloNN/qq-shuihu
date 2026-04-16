@@ -191,13 +191,11 @@ class Game:
         self.config = config
 
     def click_more(self, coord, times=10, interval=0.8):
-        """
-        连点器
+        """连点器
 
-        参数:\n
-        coord: 坐标\n
-        times: 点击次数, 默认10次\n
-        interval: 时间间隔，默认1s
+        :param coord: 坐标, 比如: ("天机秘籍", 670, 380)
+        :param times: 点击次数, 默认10次
+        :param interval: 时间间隔，默认1s
         """
         printStr = self.qq + " | " if self.qq else ""
         for i in range(times):

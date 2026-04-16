@@ -33,7 +33,7 @@ def do_task(game: Game, order_num: int, setup_time: int = 0):
     # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
     # game.Other.jiShi()
 
-    # game.click_more(("天机秘籍", 670, 380), 100)
+    game.click_more(("天机秘籍", 670, 380), 100)
 
     # game.Test.test_write(("请输入道具名称", 596, 120), 1000)
     # game.Test.test_log()
@@ -46,9 +46,9 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(459472, "2548918215"),
-        Game(263674, "2468659059"),
-        Game(460136, "3305194332"),
+        Game(656512, "2548918215"),
+        Game(198270, "2468659059"),
+        Game(263780, "3305194332"),
         # Game(1247214, "2359546960"),
         # Game(460920, "3492175458"),
         # Game(329834, "3118728968"),
@@ -87,9 +87,9 @@ def single_task():
     game = Game()
     hwnd = Hwnd.find_hwndByTitle_p_child("MainWindow", "Chrome Legacy Window")
     if hwnd is None:
-        game.logger.error("未找到窗口")
+        print("未找到窗口")
         return
-    game.logger.info(f"{hwnd} | 找到窗口")
+    print(f"{hwnd} | 找到窗口")
     game.set_hwnd(hwnd)
 
     # 2.执行操作
@@ -126,5 +126,3 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         print("\n程序已手动退出")
-    except Exception as e:
-        print("index.py | 未知错误:", e)
