@@ -26,14 +26,15 @@ def do_task(game: Game, order_num: int, setup_time: int = 0):
     # game.Bianqiang.liehun(500)
     # game.Fuben.zhengzhan(21)
     # game.Zhanzheng.juyi(order_num)
-    # game.Other.xiShuXing(150)
-    # game.Other.xiShuXing2()
+    game.Other.xiShuXing100(150)
+    # game.Other.xiShuXing1()
     # game.ZuDui.shenKun(order_num)
 
     # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
     # game.Other.jiShi()
 
-    game.click_more(("天机秘籍", 670, 380), 100)
+    # game.click_more(("天机秘籍", 670, 380), 300)
+    # game.click_more(("背包-使用", 285, 218), 200)
 
     # game.Test.test_write(("请输入道具名称", 596, 120), 1000)
     # game.Test.test_log()
@@ -46,9 +47,9 @@ def more_task():
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(656512, "2548918215"),
-        Game(198270, "2468659059"),
-        Game(263780, "3305194332"),
+        Game(394594, "2548918215"),
+        Game(198030, "2468659059"),
+        Game(263550, "3305194332"),
         # Game(1247214, "2359546960"),
         # Game(460920, "3492175458"),
         # Game(329834, "3118728968"),
@@ -115,8 +116,8 @@ def main(mode="single"):
 
 if __name__ == "__main__":
     try:
-        # main()
-        main("more")
+        main()
+        # main("more")
         while True:
             time.sleep(5)
             check_process()

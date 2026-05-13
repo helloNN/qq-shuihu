@@ -16,7 +16,7 @@ class Other:
         self.config = config
         self.qq = qq
 
-    def xiShuXing(self, time=30):
+    def xiShuXing100(self, time=30):
         """
         洗属性【一次洗100次】
 
@@ -43,7 +43,7 @@ class Other:
         self.logger.info(result)
         print(result)
 
-    def xiShuXing2(self, time=3000):
+    def xiShuXing1(self, time=3000):
         """
         洗属性【一次一次洗】
 
