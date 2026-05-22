@@ -37,10 +37,10 @@ class ZuDui(Base):
                 # 等待创建组队的创建完毕
                 TM.sleep(4)
 
-                self.util.click(加入指定队伍)
-                TM.sleep(0.5 + (order_num - 1) * 3)
-
                 self.lock.acquire()  # 进行抢锁，抢到的线程才执行
+                self.util.click(加入指定队伍)
+                TM.sleep(0.5)
+
                 self.util.type_content(输入队伍ID_输入框, 队伍ID)
 
                 TM.sleep(0.5)
@@ -52,7 +52,7 @@ class ZuDui(Base):
                 f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次"
             )
             print(
-                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次 | 从{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}开始, 等待7分钟",
+                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次 | 从{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}开始, 等待7分钟20秒",
                 end="\r",
             )
 
