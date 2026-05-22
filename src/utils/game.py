@@ -3,7 +3,7 @@ import json
 import os
 import time
 from .util import Util
-from multiprocessing.synchronize import Lock
+from multiprocessing.synchronize import Lock, Event
 from future import Bianqiang, Fuben, Zhanzheng, Other, Test, ZuDui
 
 logging.basicConfig(
@@ -32,16 +32,18 @@ class Game:
     Test: Test
     ZuDui: ZuDui
 
-    def __init__(self, hwnd: int = None, qq="", lock: Lock = None):
+    def __init__(self, hwnd: int = None, qq="", lock: Lock = None, event: Event = None):
         """Game初始化
 
         :param hwnd: 窗口句柄
         :param qq:
         :param lock: 线程锁
+        :param event: 线程事件
         """
         self.hwnd = hwnd
         self.qq = qq
         self.lock = lock
+        self.event = event
 
     def _customLogger(self):
         """自定义日志"""
@@ -81,14 +83,16 @@ class Game:
             (ZuDui, "组队"),
         ]
         for CLASS, config_key in modules:
-            instance = CLASS(util, self.config.get(config_key, {}), self.qq, self.lock)
+            instance = CLASS(
+                util, self.config.get(config_key, {}), self.qq, self.lock, self.event
+            )
             setattr(self, CLASS.__name__, instance)
 
     def set_hwnd(self, hwnd: int):
         """设置窗口句柄"""
         self.hwnd = hwnd
 
-    def count_position(self, app, auto_mount=False, new_lock=None):
+    def count_position(self, app, auto_mount=False, new_lock=None, new_event=None):
         """计算窗口偏移值(coordDiff)，比较耗时，并挂载功能
 
         :param app: pywinauto 实例
@@ -98,6 +102,7 @@ class Game:
         """
         if new_lock:
             self.lock = new_lock
+            self.event = new_event
 
         cache_file = f"src/config/cache.json"
 

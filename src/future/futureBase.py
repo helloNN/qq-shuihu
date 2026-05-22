@@ -1,11 +1,11 @@
-from multiprocessing.synchronize import Lock
+from multiprocessing.synchronize import Lock, Event
 from logging import Logger
 
 from utils.util import Util
 
 
 class Base:
-    def __init__(self, util: Util, config, qq, lock: Lock):
+    def __init__(self, util: Util, config, qq, lock: Lock, event: Event):
         """
         功能模块基础类
 
@@ -20,3 +20,4 @@ class Base:
         self.config = config
         self.qq = qq
         self.lock = lock
+        self.event = event

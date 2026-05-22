@@ -9,11 +9,12 @@ processList = []
 
 
 class TaskOption:
-    def __init__(self, game: Game, order_num: int, lock, setup_time: int = 0):
+    def __init__(self, game: Game, order_num: int, lock, event, setup_time: int = 0):
         self.game = game
         self.order_num = order_num
         self.setup_time = setup_time
         self.global_lock = lock
+        self.global_event = event
 
 
 def do_task(option: TaskOption):
@@ -26,11 +27,12 @@ def do_task(option: TaskOption):
     :param option.order_num: 进程顺序
     :param option.setup_time: 启动耗时，单位秒
     :param option.global_lock: 全局进程锁
+    :param option.global_event: 全局进程事件
     :return none:
     """
     time_start = time.time()
     app = Application(backend="uia").connect(handle=option.game.hwnd)
-    option.game.count_position(app, True, option.global_lock)
+    option.game.count_position(app, True, option.global_lock, option.global_event)
     setup_time2 = time.time() - time_start
     game = option.game
 
@@ -48,7 +50,7 @@ def do_task(option: TaskOption):
     # game.Zhanzheng.juyi(order_num)
     # game.Other.xiShuXing100(150)
     # game.Other.xiShuXing1()
-    game.ZuDui.shenKun(option.order_num)
+    game.ZuDui.shenKun()
 
     # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
     # game.Other.jiShi()
@@ -63,7 +65,7 @@ def do_task(option: TaskOption):
     # game.count_position(123)
 
 
-def more_task(lock):
+def more_task(lock, event):
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
@@ -92,7 +94,7 @@ def more_task(lock):
             # 创建进程
             p = multiprocessing.Process(
                 target=do_task,
-                args=(TaskOption(game, current_index, lock, setup_time),),
+                args=(TaskOption(game, current_index, lock, event, setup_time),),
             )
             processList.append(p)
             # 设置为守护进程，主进程结束，子进程也结束
@@ -104,7 +106,7 @@ def more_task(lock):
         current_index += 1
 
 
-def single_task(lock):
+def single_task(lock, event):
     # 1.查找窗口
     game = Game()
     hwnd = Hwnd.find_hwndByTitle_p_child("MainWindow", "Chrome Legacy Window")
@@ -115,7 +117,7 @@ def single_task(lock):
     game.set_hwnd(hwnd)
 
     # 2.执行操作
-    do_task(TaskOption(game, 0, lock))
+    do_task(TaskOption(game, 0, lock, event))
 
 
 # 是否还有进程在处理任务
@@ -129,12 +131,13 @@ def check_process() -> bool:
 # 图像识别
 def main(mode="single"):
     global_lock = multiprocessing.Lock()
+    global_event = multiprocessing.Event()
 
     if mode == "single":
-        single_task(global_lock)
+        single_task(global_lock, global_event)
     else:
         # 多窗口
-        more_task(global_lock)
+        more_task(global_lock, global_event)
 
 
 if __name__ == "__main__":

@@ -6,11 +6,10 @@ from .futureBase import Base
 
 
 class ZuDui(Base):
-    def shenKun(self, order_num, times: int = 100):
-        """
-        神困副本
-        :param order_num
-        :param times 攻打的次数, 默认1000次
+    def shenKun(self, times: int = 100):
+        """神困副本
+
+        :param times: 攻打的次数, 默认1000次
         """
 
         role = self.config.get("role", "master")
@@ -33,9 +32,12 @@ class ZuDui(Base):
                 self.util.click(人满自动开)
                 TM.sleep(0.2)
                 self.util.click(("空白位置", 650, 377))
+                self.event.set()  # 通知其它进程可以执行任务了
+                print(
+                    f"master[{self.qq}]创建组队完毕, {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}, 预计等待7分钟20秒"
+                )
             else:
-                # 等待创建组队的创建完毕
-                TM.sleep(4)
+                self.event.wait()  # 等待, 直到master创建组队完毕
 
                 self.lock.acquire()  # 进行抢锁，抢到的线程才执行
                 self.util.click(加入指定队伍)
@@ -48,13 +50,8 @@ class ZuDui(Base):
                 TM.sleep(0.5)
                 self.lock.release()  # 释放锁，其它线程可以执行了
 
-            self.logger.info(
-                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次"
-            )
-            print(
-                f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次 | 从{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}开始, 等待7分钟20秒",
-                end="\r",
-            )
+            self.logger.info(f"神困副本当前已开: {i}次, 预计次数: {times}次")
+            print(f"神困副本当前已开: {i}次, 预计次数: {times}次", end="\r")
 
             # 用于解决: 组队的人点击过快
             loop = i // 5
