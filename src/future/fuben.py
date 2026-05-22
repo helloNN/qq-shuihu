@@ -1,21 +1,10 @@
 from contextlib import contextmanager
 from coords.zhengzhan import *
 import time as TM
-from utils.util import Util
+from .futureBase import Base
 
 
-class Fuben:
-    util: Util = None
-    logger = None
-    config = {}
-    qq = ""
-
-    def __init__(self, util, config, qq):
-        self.util = util
-        self.logger = util.logger
-        self.config = config
-        self.qq = qq
-
+class Fuben(Base):
     def zhengzhan(self, time=5):
         """
         征战

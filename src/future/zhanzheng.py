@@ -1,21 +1,10 @@
 from contextlib import contextmanager
 from coords.juyi import *
 import time as TM
-from utils.util import Util
+from .futureBase import Base
 
 
-class Zhanzheng:
-    util: Util = None
-    logger = None
-    config = {}
-    qq = ""
-
-    def __init__(self, util, config, qq):
-        self.util = util
-        self.logger = util.logger
-        self.config = config
-        self.qq = qq
-
+class Zhanzheng(Base):
     def juyi(self, sleep_time: int = 0):
         """
         聚义

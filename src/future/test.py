@@ -1,20 +1,7 @@
-from contextlib import contextmanager
-import time as TM
-from utils.util import Util
+from .futureBase import Base
 
 
-class Test:
-    util: Util = None
-    logger = None
-    config = {}
-    qq = ""
-
-    def __init__(self, util, config, qq):
-        self.util = util
-        self.logger = util.logger
-        self.config = config
-        self.qq = qq
-
+class Test(Base):
     def test_write(self, coord, content):
         """
         测试输入框输入内容

@@ -1,22 +1,11 @@
-from contextlib import contextmanager
-from coords.zudui import *
 import time as TM
 from datetime import datetime
-from utils.util import Util
+
+from coords.zudui import *
+from .futureBase import Base
 
 
-class ZuDui:
-    util: Util = None
-    logger = None
-    config = {}
-    qq = ""
-
-    def __init__(self, util, config, qq):
-        self.util = util
-        self.logger = util.logger
-        self.config = config
-        self.qq = qq
-
+class ZuDui(Base):
     def shenKun(self, order_num, times: int = 100):
         """
         神困副本
@@ -42,17 +31,22 @@ class ZuDui:
                 self.util.click(创建)
                 TM.sleep(0.5)
                 self.util.click(人满自动开)
+                TM.sleep(0.2)
+                self.util.click(("空白位置", 650, 377))
             else:
                 # 等待创建组队的创建完毕
-                TM.sleep(3)
+                TM.sleep(4)
 
                 self.util.click(加入指定队伍)
-
                 TM.sleep(0.5 + (order_num - 1) * 3)
+
+                self.lock.acquire()  # 进行抢锁，抢到的线程才执行
                 self.util.type_content(输入队伍ID_输入框, 队伍ID)
 
                 TM.sleep(0.5)
                 self.util.click(加入队伍)
+                TM.sleep(0.5)
+                self.lock.release()  # 释放锁，其它线程可以执行了
 
             self.logger.info(
                 f"{self.qq} | 神困副本当前已开: {i}次 | 预计次数: {times}次"

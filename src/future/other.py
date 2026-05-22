@@ -1,21 +1,9 @@
-from contextlib import contextmanager
 from coords.other import *
 import time as TM
-from utils.util import Util
+from .futureBase import Base
 
 
-class Other:
-    util: Util = None
-    logger = None
-    config = {}
-    qq = ""
-
-    def __init__(self, util, config, qq):
-        self.util = util
-        self.logger = util.logger
-        self.config = config
-        self.qq = qq
-
+class Other(Base):
     def xiShuXing100(self, time=30):
         """
         洗属性【一次洗100次】

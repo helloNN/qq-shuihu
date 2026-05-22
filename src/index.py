@@ -8,17 +8,37 @@ import time
 processList = []
 
 
-def do_task(game: Game, order_num: int, setup_time: int = 0):
+class TaskOption:
+    def __init__(self, game: Game, order_num: int, lock, setup_time: int = 0):
+        self.game = game
+        self.order_num = order_num
+        self.setup_time = setup_time
+        self.global_lock = lock
+
+
+def do_task(option: TaskOption):
+    """
+    任务
+
+    :param option:配置参数
+
+    :param option.game: 游戏实例
+    :param option.order_num: 进程顺序
+    :param option.setup_time: 启动耗时，单位秒
+    :param option.global_lock: 全局进程锁
+    :return none:
+    """
     time_start = time.time()
-    app = Application(backend="uia").connect(handle=game.hwnd)
-    game.count_position(app, True)
+    app = Application(backend="uia").connect(handle=option.game.hwnd)
+    option.game.count_position(app, True, option.global_lock)
     setup_time2 = time.time() - time_start
+    game = option.game
 
     print(
         " | ".join(
             [
                 game.qq,
-                f"程序初始化耗时: {round(setup_time if setup_time>0 else setup_time2, 2)}s",
+                f"程序初始化耗时: {round(option.setup_time if option.setup_time>0 else setup_time2, 2)}s",
             ]
         )
     )
@@ -28,7 +48,7 @@ def do_task(game: Game, order_num: int, setup_time: int = 0):
     # game.Zhanzheng.juyi(order_num)
     # game.Other.xiShuXing100(150)
     # game.Other.xiShuXing1()
-    game.ZuDui.shenKun(order_num)
+    game.ZuDui.shenKun(option.order_num)
 
     # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
     # game.Other.jiShi()
@@ -43,14 +63,14 @@ def do_task(game: Game, order_num: int, setup_time: int = 0):
     # game.count_position(123)
 
 
-def more_task():
+def more_task(lock):
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(1312036, "2548918215"),
-        Game(198014, "2468659059"),
-        Game(656684, "3305194332"),
-        Game(395004, "3492175458"),
+        Game(721384, "2548918215"),
+        Game(460704, "2468659059"),
+        Game(591408, "3305194332"),
+        Game(722338, "3492175458"),
         # Game(460920, "3492175458"),
         # Game(329834, "3118728968"),
     ]
@@ -71,7 +91,8 @@ def more_task():
         try:
             # 创建进程
             p = multiprocessing.Process(
-                target=do_task, args=(game, current_index, setup_time)
+                target=do_task,
+                args=(TaskOption(game, current_index, lock, setup_time),),
             )
             processList.append(p)
             # 设置为守护进程，主进程结束，子进程也结束
@@ -83,7 +104,7 @@ def more_task():
         current_index += 1
 
 
-def single_task():
+def single_task(lock):
     # 1.查找窗口
     game = Game()
     hwnd = Hwnd.find_hwndByTitle_p_child("MainWindow", "Chrome Legacy Window")
@@ -94,7 +115,7 @@ def single_task():
     game.set_hwnd(hwnd)
 
     # 2.执行操作
-    do_task(game, 0)
+    do_task(TaskOption(game, 0, lock))
 
 
 # 是否还有进程在处理任务
@@ -107,11 +128,13 @@ def check_process() -> bool:
 # handle 手动获取, 目前无法通过代码一次夺取全都符合条件的窗口句柄
 # 图像识别
 def main(mode="single"):
+    global_lock = multiprocessing.Lock()
+
     if mode == "single":
-        single_task()
+        single_task(global_lock)
     else:
         # 多窗口
-        more_task()
+        more_task(global_lock)
 
 
 if __name__ == "__main__":

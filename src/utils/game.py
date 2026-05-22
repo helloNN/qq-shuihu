@@ -3,8 +3,8 @@ import json
 import os
 import time
 from .util import Util
+from multiprocessing.synchronize import Lock
 from future import Bianqiang, Fuben, Zhanzheng, Other, Test, ZuDui
-
 
 logging.basicConfig(
     filename="logs/game.log",
@@ -21,18 +21,27 @@ class Game:
     qq = ""
     logger = None
     coordDiff = (0, 0)  # 位置偏移
-    util = None
-    Bianqiang = None
     config = {}
 
-    def __init__(self, hwnd: int = None, qq=""):
+    # 在这里声明所有属性类型（给编辑器提示用的）
+    util: Util
+    Bianqiang: Bianqiang
+    Fuben: Fuben
+    Zhanzheng: Zhanzheng
+    Other: Other
+    Test: Test
+    ZuDui: ZuDui
+
+    def __init__(self, hwnd: int = None, qq="", lock: Lock = None):
         """Game初始化
 
         :param hwnd: 窗口句柄
         :param qq:
+        :param lock: 线程锁
         """
         self.hwnd = hwnd
         self.qq = qq
+        self.lock = lock
 
     def _customLogger(self):
         """自定义日志"""
@@ -63,24 +72,33 @@ class Game:
         self.util = util
 
         # 挂载功能
-        self.Bianqiang = Bianqiang(util, self.config.get("变强", {}), self.qq)
-        self.Fuben = Fuben(util, self.config.get("副本", {}), self.qq)
-        self.Zhanzheng = Zhanzheng(util, self.config.get("战争", {}), self.qq)
-        self.Other = Other(util, self.config.get("其它", {}), self.qq)
-        self.Test = Test(util, self.config.get("测试", {}), self.qq)
-        self.ZuDui = ZuDui(util, self.config.get("组队", {}), self.qq)
+        modules = [
+            (Bianqiang, "变强"),
+            (Fuben, "副本"),
+            (Zhanzheng, "战争"),
+            (Other, "其它"),
+            (Test, "测试"),
+            (ZuDui, "组队"),
+        ]
+        for CLASS, config_key in modules:
+            instance = CLASS(util, self.config.get(config_key, {}), self.qq, self.lock)
+            setattr(self, CLASS.__name__, instance)
 
     def set_hwnd(self, hwnd: int):
         """设置窗口句柄"""
         self.hwnd = hwnd
 
-    def count_position(self, app, auto_mount=False):
+    def count_position(self, app, auto_mount=False, new_lock=None):
         """计算窗口偏移值(coordDiff)，比较耗时，并挂载功能
 
         :param app: pywinauto 实例
         :param auto_mount: 自动挂载功能模块
+        :param new_lock: 新的线程锁
         :return none:
         """
+        if new_lock:
+            self.lock = new_lock
+
         cache_file = f"src/config/cache.json"
 
         # 1.根据缓存来执行
