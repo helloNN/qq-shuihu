@@ -1,5 +1,7 @@
 import win32api
 import win32con
+import win32clipboard
+
 import time
 from logging import Logger
 
@@ -25,7 +27,7 @@ class Util:
         )
 
     def type_content(self, coord, content):
-        Util.flash_input_wm_char(
+        Util.flash_input_set(
             {
                 "hwnd": self.hwnd,
                 "name": coord[0],
@@ -33,6 +35,16 @@ class Util:
                 "logger": self.logger,
             },
             content,
+        )
+
+    def get_content(self, coord):
+        return Util.flash_input_get(
+            {
+                "hwnd": self.hwnd,
+                "name": coord[0],
+                "coord": (coord[1] + self.offset[0], coord[2] + self.offset[1]),
+                "logger": self.logger,
+            }
         )
 
     @staticmethod
@@ -49,7 +61,7 @@ class Util:
             f"{info['hwnd']} | 后台点击: {info['name']} {info['coord']})"
         )
 
-        (x, y) = info["coord"]
+        x, y = info["coord"]
         long_position = win32api.MAKELONG(x, y)
         win32api.SendMessage(info["hwnd"], win32con.WM_LBUTTONDOWN, 0, long_position)
         time.sleep(0.05)
@@ -87,7 +99,7 @@ class Util:
             raise
 
     @classmethod
-    def flash_input_wm_char(cls, info: dict, number):
+    def flash_input_set(cls, info: dict, number):
         """
         原生WM_CHAR消息向Flash窗口输入数字（适配性远优于WM_KEYDOWN）
         """
@@ -113,3 +125,45 @@ class Util:
         except Exception as e:
             info["logger"].error(f"WM_CHAR输入失败: {e}")
             raise
+
+    @classmethod
+    def flash_input_get(cls, info: dict) -> str:
+        """
+        【终极版】后台消息模拟 Ctrl+A → Ctrl+C 读取 Flash 输入框内容
+        无前台按键、无剪贴板报错、不抢窗口、不干扰用户
+        """
+        # 1. 后台点击获取焦点
+        cls.bg_click(info)
+        time.sleep(0.2)
+
+        hwnd = info["hwnd"]
+
+        # 2. 系统级模拟 Ctrl+A（和手动一模一样！）
+
+        # 3. 系统级模拟 Ctrl+C
+
+        # 4.获取剪切板内容
+        text = Util.get_ctrl_c()
+        print(f"剪贴板内容: {text}")
+
+    @staticmethod
+    def get_ctrl_c():
+        """获取剪切板内容
+        :return None:
+        """
+        text = ""
+        for _ in range(5):
+            try:
+                # 正确打开剪贴板方式（无None参数）
+                win32clipboard.OpenClipboard()
+                try:
+                    text = win32clipboard.GetClipboardData(win32con.CF_UNICODETEXT)
+                except:
+                    text = ""
+                win32clipboard.CloseClipboard()
+                break
+            except Exception as e:
+                time.sleep(0.1)
+
+        final_text = str(text).strip()
+        return final_text

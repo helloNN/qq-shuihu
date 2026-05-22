@@ -12,3 +12,6 @@ class Test(Base):
 
     def test_log(self):
         self.logger.info(self.qq)
+
+    def test_input_get(self, coord):
+        self.util.get_content(coord)

@@ -84,7 +84,12 @@ class Game:
         ]
         for CLASS, config_key in modules:
             instance = CLASS(
-                util, self.config.get(config_key, {}), self.qq, self.lock, self.event
+                self.hwnd,
+                util,
+                self.config.get(config_key, {}),
+                self.qq,
+                self.lock,
+                self.event,
             )
             setattr(self, CLASS.__name__, instance)
 

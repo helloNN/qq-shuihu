@@ -50,7 +50,7 @@ def do_task(option: TaskOption):
     # game.Zhanzheng.juyi(order_num)
     # game.Other.xiShuXing100(150)
     # game.Other.xiShuXing1()
-    game.ZuDui.shenKun()
+    # game.ZuDui.shenKun()
 
     # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
     # game.Other.jiShi()
@@ -60,6 +60,7 @@ def do_task(option: TaskOption):
 
     # game.Test.test_write(("请输入道具名称", 596, 120), 1000)
     # game.Test.test_log()
+    game.Test.test_input_get(("请输入队伍ID", 520, 296))
 
     # game.logger.info(f"{game.qq} | hello world | {id(game.logger)}")
     # game.count_position(123)
@@ -69,10 +70,10 @@ def more_task(lock, event):
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(721384, "2548918215"),
-        Game(460704, "2468659059"),
-        Game(591408, "3305194332"),
-        Game(722338, "3492175458"),
+        Game(132466, "2548918215"),
+        # Game(329136, "2468659059"),
+        # Game(329138, "3305194332"),
+        # Game(525084, "3492175458"),
         # Game(460920, "3492175458"),
         # Game(329834, "3118728968"),
     ]
