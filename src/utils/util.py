@@ -11,10 +11,11 @@ class Util:
     offset = (0, 0)
     logger: Logger = None
 
-    def __init__(self, hwnd, offset, logger: Logger):
+    def __init__(self, hwnd, offset, logger: Logger, printClick=False):
         self.hwnd = hwnd
         self.offset = offset
         self.logger = logger
+        self.printClick = printClick
 
     def click(self, coord):
         Util.bg_click(
@@ -23,7 +24,8 @@ class Util:
                 "name": coord[0],
                 "coord": (coord[1] + self.offset[0], coord[2] + self.offset[1]),
                 "logger": self.logger,
-            }
+            },
+            self.printClick,
         )
 
     def type_content(self, coord, content):
@@ -52,20 +54,21 @@ class Util:
         return (rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top)
 
     @staticmethod
-    def bg_click(info: dict):
+    def bg_click(info: dict, printClick):
         """
         后台左键单机
         """
-        # print("info:", info)
-        info["logger"].info(
-            f"{info['hwnd']} | 后台点击: {info['name']} {info['coord']})"
-        )
-
         x, y = info["coord"]
         long_position = win32api.MAKELONG(x, y)
         win32api.SendMessage(info["hwnd"], win32con.WM_LBUTTONDOWN, 0, long_position)
         time.sleep(0.05)
         win32api.SendMessage(info["hwnd"], win32con.WM_LBUTTONUP, 0, long_position)
+
+        info["logger"].info(
+            f"{info['hwnd']} | 后台点击: {info['name']} {info['coord']})"
+        )
+        if printClick:
+            print(f"后台点击: {info['name']} {info['coord']})")
 
     @classmethod
     def bg_input_number(cls, info: dict, number):

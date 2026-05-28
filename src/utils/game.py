@@ -70,7 +70,9 @@ class Game:
             self._customLogger()
         self.load_config()
 
-        util = Util(self.hwnd, self.coordDiff, self.logger)
+        util = Util(
+            self.hwnd, self.coordDiff, self.logger, self.config.get("printClick", False)
+        )
         self.util = util
 
         # 挂载功能

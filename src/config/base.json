@@ -1,5 +1,6 @@
 {
   "cache": true,
+  "printClick": false,
   "战争": {
     "聚义": {
       "position": [3, 3],

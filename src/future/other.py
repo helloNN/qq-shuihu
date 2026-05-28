@@ -88,3 +88,22 @@ class Other(Base):
         print(
             f"{self.qq}在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个, 耗时:{round(TM.time() - start_time, 2)}s"
         )
+
+    def jingJiChang(self, time=13):
+        """竞技场
+
+        :param time: 攻打次数
+        """
+        for ii in range(time):
+            self.util.click(立即开战)
+            TM.sleep(7.5)
+
+            self.util.click(战斗结束)
+            TM.sleep(0.2)
+            self.util.click(战斗结束)
+            TM.sleep(3)
+
+            self.util.click(关闭)
+            TM.sleep(1)
+
+            print(f"{self.qq} | 已攻打: {ii+1} 次, 预计要攻打: {time}次", end="\r")
