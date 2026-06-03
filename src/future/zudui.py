@@ -6,18 +6,26 @@ from .futureBase import Base
 
 
 class ZuDui(Base):
-    def shenKun(self, times: int = 100):
+    def shenKun(self, select_index: int = 2, times: int = 100):
         """神困副本
 
+        :param select_index: 副本的索引, 默认2, 神将罗汉山
         :param times: 攻打的次数, 默认1000次
         """
 
         role = self.config.get("role", "master")
         队伍ID = self.config.get("队伍ID", 2956253289)
 
+        if select_index == 0:
+            副本 = 激战东平府
+        elif select_index == 1:
+            副本 = 鏖战东昌府
+        else:
+            副本 = 神降罗汉山
+
         for i in range(1, times + 1):
             if role == "master":
-                self.util.click(神降罗汉山)
+                self.util.click(副本)
                 TM.sleep(0.5)
                 self.util.click(创建组队副本)
                 TM.sleep(0.5)

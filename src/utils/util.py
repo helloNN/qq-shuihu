@@ -108,7 +108,7 @@ class Util:
         """
         try:
             # 1. 后台点击获取焦点
-            cls.bg_click(info)
+            cls.bg_click(info, False)
             time.sleep(0.2)
 
             # 2. 转换数字为字符串，发送WM_CHAR消息

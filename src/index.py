@@ -47,14 +47,16 @@ def do_task(option: TaskOption):
 
     # game.Bianqiang.liehun(500)
     # game.Fuben.zhengzhan(21)
-    game.Zhanzheng.juyi(option.order_num)
+    # game.Zhanzheng.juyi(option.order_num)
+
     # game.Other.xiShuXing100(150)
     # game.Other.xiShuXing1()
     # game.Other.jingJiChang()
-    # game.ZuDui.shenKun()
-
+    game.Other.youShanXunBao()
     # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
     # game.Other.jiShi()
+
+    # game.ZuDui.shenKun(0)
 
     # game.click_more(("天机秘籍", 670, 380), 300)
     # game.click_more(("背包-使用", 285, 218), 200)
@@ -71,10 +73,10 @@ def more_task(lock, event):
     print(f"cpu核心数: {os.cpu_count()}")
     global processList
     games = [
-        Game(7275846, "2548918215"),
-        Game(132476, "2468659059"),
-        Game(198048, "3305194332"),
-        # Game(197626, "3492175458"),
+        Game(263404, "2548918215"),
+        Game(197902, "2468659059"),
+        Game(263398, "3305194332"),
+        # Game(329022, "3492175458"),
         # Game(460920, "3492175458"),
         # Game(329834, "3118728968"),
     ]

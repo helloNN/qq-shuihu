@@ -107,3 +107,21 @@ class Other(Base):
             TM.sleep(1)
 
             print(f"{self.qq} | 已攻打: {ii+1} 次, 预计要攻打: {time}次", end="\r")
+
+    def youShanXunBao(self, time=100):
+        """游山寻宝
+
+        :param time:游山次数, 默认100次
+        """
+
+        self.util.click(跳过动画)
+        TM.sleep(0.3)
+
+        for ii in range(time):
+            self.util.click(徒步游山)
+            TM.sleep(0.5)
+
+            self.util.click(跳过动画)
+            TM.sleep(0.3)
+
+            print(f"{self.qq} | 已攻打: {ii+1} 次, | 预计要攻打: {time}次", end="\r")
