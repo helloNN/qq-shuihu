@@ -60,10 +60,12 @@ class Zhanzheng(Base):
                 )
 
         self.logger.info(
-            f"聚义结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"
+            f"{self.qq} | 聚义结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"
         )
         print(
-            f"聚义结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"
+            f"{self.qq} | 聚义结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}".ljust(
+                80
+            )
         )
 
     @contextmanager

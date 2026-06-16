@@ -57,8 +57,8 @@ class ZuDui(Base):
                 TM.sleep(0.3)
                 self.lock.release()  # 释放锁，其它线程可以执行了
 
-            self.logger.info(f"神困副本当前已开: {i}次, 预计次数: {times}次")
-            print(f"神困副本当前已开: {i}次, 预计次数: {times}次", end="\r")
+            self.logger.info(f"{副本[0]}当前已开: {i}次, 预计次数: {times}次")
+            print(f"{副本[0]}当前已开: {i}次, 预计次数: {times}次", end="\r")
 
             # 用于解决: 组队的人点击过快
             loop = i // 5

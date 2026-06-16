@@ -44,6 +44,8 @@ class Game:
         self.qq = qq
         self.lock = lock
         self.event = event
+        self.logger = logging.getLogger(f"Game-{self.qq or __name__}")
+        self.load_config()
 
     def _customLogger(self):
         """自定义日志"""
@@ -68,7 +70,6 @@ class Game:
         self.logger = logging.getLogger(f"Game-{self.qq or __name__}")
         if self.qq:
             self._customLogger()
-        self.load_config()
 
         util = Util(
             self.hwnd, self.coordDiff, self.logger, self.config.get("printClick", False)
@@ -114,7 +115,9 @@ class Game:
         cache_file = f"src/config/cache.json"
 
         # 1.根据缓存来执行
-        use_cache = self.config.get("cache", True)
+        use_cache = self.config.get("cache", False)
+        cached_json = {}
+
         if use_cache:
             with open(cache_file, encoding="utf-8") as f:
                 cached_json = json.load(f)
@@ -124,9 +127,8 @@ class Game:
                 self.coordDiff = tuple(cached_coordDiff)
                 auto_mount and self._mountFuture()
                 return
-
-        # 2.自身有数据的时候不进行重复计算，因为耗时
-        if self.coordDiff[0] != 0 and self.coordDiff[1] != 0 and auto_mount:
+        elif self.coordDiff[0] != 0 and self.coordDiff[1] != 0:
+            # 2.自身有数据的时候不进行重复计算，因为耗时
             self._mountFuture()
             return
 
@@ -166,7 +168,7 @@ class Game:
             print("coordDiff已写入缓存文件")
 
         # 挂载功能
-        auto_mount and self._mountFuture()
+        self._mountFuture()
 
     def getFlashDom(self, element):
         """获取falsh窗口"""

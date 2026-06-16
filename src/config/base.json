@@ -3,7 +3,7 @@
   "printClick": false,
   "战争": {
     "聚义": {
-      "position": [1, 2],
+      "position": [1, 3],
       "time": 30,
       "stop": false
     }

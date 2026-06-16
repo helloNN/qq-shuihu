@@ -96,7 +96,7 @@ class Other(Base):
         """
         for ii in range(time):
             self.util.click(立即开战)
-            TM.sleep(7.5)
+            TM.sleep(7)
 
             self.util.click(战斗结束)
             TM.sleep(0.2)
@@ -111,7 +111,7 @@ class Other(Base):
     def youShanXunBao(self, time=100):
         """游山寻宝
 
-        :param time:游山次数, 默认100次
+        :param time: 游山次数, 默认100次
         """
 
         self.util.click(跳过动画)
