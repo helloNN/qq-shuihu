@@ -70,7 +70,9 @@ def do_task(option: TaskOption):
 
 
 def more_task(lock, event):
-    print(f"cpu核心数: {os.cpu_count()}")
+    print(
+        f"cpu核心数: {os.cpu_count()} | 只要游戏尺寸发生变化，就必须手动将 base.json 里面的 cache 设置为false"
+    )
     global processList
     games = [
         Game(394648, "2548918215"),
