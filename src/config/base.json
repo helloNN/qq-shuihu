@@ -3,8 +3,8 @@
   "printClick": false,
   "战争": {
     "聚义": {
-      "position": [1, 3],
-      "time": 30,
+      "position": [1, 5],
+      "time": 10,
       "stop": false
     }
   },

@@ -28,7 +28,7 @@ def do_task(option: TaskOption):
     :param option.setup_time: 启动耗时，单位秒
     :param option.global_lock: 全局进程锁
     :param option.global_event: 全局进程事件
-    :return none:
+    :return None:
     """
     time_start = time.time()
     app = Application(backend="uia").connect(handle=option.game.hwnd)
@@ -46,7 +46,7 @@ def do_task(option: TaskOption):
     )
 
     # game.Bianqiang.liehun(500)
-    # game.Fuben.zhengzhan(21)
+    game.Fuben.zhengzhan(21)
     # game.Zhanzheng.juyi(option.order_num)
 
     # game.Other.xiShuXing100(150)
@@ -75,10 +75,10 @@ def more_task(lock, event):
     )
     global processList
     games = [
-        Game(394648, "2548918215"),
-        Game(327962, "2468659059"),
-        Game(460040, "3305194332"),
-        # Game(1181456, "3492175458"),
+        Game(67132, "2548918215"),
+        Game(132770, "2468659059"),
+        Game(263772, "3305194332"),
+        # Game(657546, "3492175458"),
         # Game(460920, "3492175458"),
         # Game(329834, "3118728968"),
     ]

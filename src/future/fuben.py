@@ -13,7 +13,6 @@ class Fuben(Base):
         time: 征战次数, 默认5次
         """
         self.logger.info(f"征战开始, 预计次数: {time}")
-        print(f"征战开始")
         startTime = TM.time()
         realTime = 0
 
@@ -39,7 +38,9 @@ class Fuben(Base):
             f"征战结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"
         )
         print(
-            f"征战结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"
+            f"{self.qq} | 征战结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}".ljust(
+                80
+            )
         )
 
     @contextmanager
