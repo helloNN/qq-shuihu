@@ -14,7 +14,6 @@ class Bianqiang(Base):
         time: 猎魂次数, 默认20次
         """
         self.logger.info(f"猎魂开始, 预计次数: {time}")
-        print(f"猎魂开始, 预计次数: {time}")
         startTime = TM.time()
         realTime = 0
 
@@ -26,14 +25,18 @@ class Bianqiang(Base):
                 TM.sleep(2)
                 self.util.click(一键合成)
                 realTime += 1
-                print(f"当前已猎魂: {realTime} 次", end="\r")
+                print(
+                    f"{self.qq} | 当前已猎魂: {realTime} 次 | 预期: {time}次", end="\r"
+                )
                 TM.sleep(1)
 
         self.logger.info(
             f"猎魂结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"
         )
         print(
-            f"猎魂结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"
+            f"{self.qq} | 猎魂结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}".ljust(
+                80
+            )
         )
 
     @contextmanager
