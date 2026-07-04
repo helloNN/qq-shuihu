@@ -54,7 +54,7 @@ class Util:
         return (rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top)
 
     @staticmethod
-    def bg_click(info: dict, printClick):
+    def bg_click(info: dict, printClick=False):
         """
         后台左键单机
         """
