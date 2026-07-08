@@ -55,7 +55,9 @@ class Zhanzheng(Base):
                 realTime += 1
 
                 print(
-                    f"{printStr} 当前已聚义: {realTime} 次 | 预计次数: {count}",
+                    f"{printStr} 当前已聚义: {realTime} 次 | 预计次数: {count}".ljust(
+                        80
+                    ),
                     end="\r",
                 )
 

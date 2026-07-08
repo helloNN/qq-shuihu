@@ -117,11 +117,15 @@ class Game:
         # 1.根据缓存来执行
         use_cache = self.config.get("cache", False)
         cached_json = {}
+        cached_coordDiff = False
 
         if use_cache:
-            with open(cache_file, encoding="utf-8") as f:
-                cached_json = json.load(f)
-                cached_coordDiff = cached_json.get("coordDiff")
+            try:
+                with open(cache_file, encoding="utf-8") as f:
+                    cached_json = json.load(f)
+                    cached_coordDiff = cached_json.get("coordDiff")
+            except:
+                print(f"{cache_file}: 未找到该文件 | 程序将自动创建该缓存文件")
 
             if cached_coordDiff:
                 self.coordDiff = tuple(cached_coordDiff)
