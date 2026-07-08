@@ -3,3 +3,4 @@ __pycache__
 *.egg-info
 logs/*.log
 src/config/[0-9]*.json
+src/config/cache.json
