@@ -54,7 +54,8 @@ def do_task(option: TaskOption):
     # game.Other.jingJiChang()
     # game.Other.youShanXunBao(250)
     # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
-    game.Other.jiShi()
+    # game.Other.jiShi()
+    game.Other.shengChenGang_chouJiang()
 
     # game.ZuDui.shenKun(0)
 
@@ -75,11 +76,11 @@ def more_task(lock, event):
     )
     global processList
     games = [
-        Game(4851144, "2548918215"),
-        Game(722458, "2468659059"),
-        Game(263686, "3305194332"),
-        # Game(657546, "3492175458"),
-        # Game(460920, "3492175458"),
+        Game(66882, "2548918215"),
+        Game(132470, "2468659059"),
+        Game(132500, "3305194332"),
+        # Game(4720120, "3492175458"),
+        # Game(590732, "3492175458"),
         # Game(329834, "3118728968"),
     ]
 

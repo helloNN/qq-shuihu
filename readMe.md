@@ -24,3 +24,13 @@ with open(cache_file, "w", encoding="utf-8") as f:
     print("coordDiff已写入缓存文件")
 ```
 
+
+
+
+
+
+
+# 待办事项列表
+
+- [ ] 根据窗口句柄，获取进程ID
+- [ ] 根据进程ID，获取内存信息

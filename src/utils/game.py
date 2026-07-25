@@ -169,7 +169,7 @@ class Game:
         cached_json["coordDiff"] = self.coordDiff
         with open(cache_file, "w", encoding="utf-8") as f:
             json.dump(cached_json, f, ensure_ascii=False, indent=2)
-            print("coordDiff已写入缓存文件")
+            print(f"coordDiff: {self.coordDiff}, 已写入缓存文件")
 
         # 挂载功能
         self._mountFuture()

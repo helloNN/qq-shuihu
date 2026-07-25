@@ -108,20 +108,20 @@ class Other(Base):
 
             print(f"{self.qq} | 已攻打: {ii+1} 次, 预计要攻打: {time}次", end="\r")
 
-    def youShanXunBao(self, time=100):
-        """游山寻宝
+    def shengChenGang_chouJiang(self, time=20):
+        """生辰纲抽奖
 
-        :param time: 游山次数, 默认100次
+        :param time: 抽奖次数, 默认20次
         """
 
-        self.util.click(跳过动画)
+        self.util.click(开启十次_确定)
         TM.sleep(0.3)
 
         for ii in range(time):
-            self.util.click(徒步游山)
-            TM.sleep(0.5)
+            self.util.click(开启十次)
+            TM.sleep(2.9)
 
-            self.util.click(跳过动画)
+            self.util.click(开启十次_确定)
             TM.sleep(0.3)
 
-            print(f"{self.qq} | 已攻打: {ii+1} 次, | 预计要攻打: {time}次", end="\r")
+            print(f"{self.qq} | 已抽奖: {ii+1} 次, | 预计要抽奖: {time}次", end="\r")
