@@ -1,6 +1,9 @@
 import win32api
 import win32con
 import win32clipboard
+import subprocess
+import csv
+from io import StringIO
 
 import time
 from logging import Logger
@@ -48,6 +51,10 @@ class Util:
                 "logger": self.logger,
             }
         )
+
+    def get_qq_shui_hu(self):
+        temp = Util.get_pid_by_exe("CefSharp.BrowserSubprocess.exe")
+        print(temp)
 
     @staticmethod
     def getPosition(rect):
@@ -170,3 +177,29 @@ class Util:
 
         final_text = str(text).strip()
         return final_text
+
+    @staticmethod
+    def get_pid_by_exe(exe_name: str):
+        """获取指定exe全部PID
+        :param exe_name: exe文件的名字
+        """
+        raw = subprocess.check_output(
+            ["tasklist", "/FO", "csv", "/NH"],
+            shell=True,
+            encoding="gbk",
+            errors="ignore",
+        )
+        stream = StringIO(raw)
+        reader = csv.reader(stream)
+        all_pids = []
+        target_exe = exe_name.lower()
+
+        for row in reader:
+            if len(row) < 2:
+                continue
+            proc_name = row[0].strip('"').lower()
+            pid_str = row[1].strip('"')
+            if proc_name == target_exe and pid_str.isdigit():
+                all_pids.append(int(pid_str))
+
+        return all_pids

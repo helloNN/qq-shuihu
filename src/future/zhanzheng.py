@@ -35,7 +35,9 @@ class Zhanzheng(Base):
         position = ("聚义攻打位置", *self._calculate_juyi_position(position))
 
         printStr = f'{self.qq} | {tuple(option.get("position")) } | ' if self.qq else ""
-        print(f'{self.qq} | 聚义准备开始攻打: {tuple(option.get("position"))}')
+        print(
+            f'{self.qq} | 聚义准备开始攻打: {tuple(option.get("position"))} | {count} 次'
+        )
 
         with self._juyi():
             times = (x for x in range(count))

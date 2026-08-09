@@ -55,7 +55,7 @@ def do_task(option: TaskOption):
     # game.Other.youShanXunBao(250)
     # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
     # game.Other.jiShi()
-    game.Other.shengChenGang_chouJiang()
+    # game.Other.shengChenGang_chouJiang()
 
     # game.ZuDui.shenKun(0)
 
@@ -65,6 +65,7 @@ def do_task(option: TaskOption):
     # game.Test.test_write(("请输入道具名称", 596, 120), 1000)
     # game.Test.test_log()
     # game.Test.test_input_get(("请输入队伍ID", 520, 296))
+    game.Test.get_pid()
 
     # game.logger.info(f"{game.qq} | hello world | {id(game.logger)}")
     # game.count_position(123)
@@ -76,10 +77,10 @@ def more_task(lock, event):
     )
     global processList
     games = [
-        Game(66882, "2548918215"),
-        Game(132470, "2468659059"),
-        Game(132500, "3305194332"),
-        # Game(4720120, "3492175458"),
+        Game(133020, "2548918215"),
+        Game(460644, "2468659059"),
+        Game(329654, "3305194332"),
+        # Game(918828, "3492175458"),
         # Game(590732, "3492175458"),
         # Game(329834, "3118728968"),
     ]
@@ -149,8 +150,8 @@ def main(mode="single"):
 
 if __name__ == "__main__":
     try:
-        # main()
-        main("more")
+        main()
+        # main("more")
         while True:
             time.sleep(5)
             check_process()

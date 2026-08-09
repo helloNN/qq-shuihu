@@ -34,3 +34,4 @@ with open(cache_file, "w", encoding="utf-8") as f:
 
 - [ ] 根据窗口句柄，获取进程ID
 - [ ] 根据进程ID，获取内存信息
+- [ ] 后台截图

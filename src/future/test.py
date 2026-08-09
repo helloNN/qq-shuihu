@@ -15,3 +15,6 @@ class Test(Base):
 
     def test_input_get(self, coord):
         self.util.get_content(coord)
+
+    def get_pid(self):
+        self.util.get_qq_shui_hu()
