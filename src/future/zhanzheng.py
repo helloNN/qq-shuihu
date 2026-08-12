@@ -50,18 +50,17 @@ class Zhanzheng(Base):
                 self.util.click(确定)
                 TM.sleep(1.5)
                 self.util.click(战斗结束)
-                TM.sleep(3.5)
-                self.util.click(关闭)
-                TM.sleep(3.5)
-
                 realTime += 1
-
                 print(
                     f"{printStr} 当前已聚义: {realTime} 次 | 预计次数: {count}".ljust(
                         80
                     ),
                     end="\r",
                 )
+                TM.sleep(3.5)
+
+                self.util.click(关闭)
+                TM.sleep(3.5)
 
         self.logger.info(
             f"{self.qq} | 聚义结束, 耗时: {round(TM.time() - startTime, 2)}s, 实际次数: {realTime}"

@@ -8,7 +8,6 @@ dependencies = [
     # 图像处理和计算机视觉
     "opencv-python>=4.8.0",
     "numpy>=1.24.0",
-    "Pillow>=10.0.0",
     # 窗口管理
     "pygetwindow>=0.0.9",
     # 测试框架
@@ -38,4 +37,5 @@ dependencies = [
     # 个人添加的库
     "pywinauto >=0.6.9", # Windows GUI自动化
     "psutil>=7.0.0",     # Windows系统和进程管理
+    "pillow>=12.0.0",    # 后台截图
 ]
