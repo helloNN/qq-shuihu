@@ -56,8 +56,10 @@ class Other(Base):
         print(result)
 
     def jiShi(self, done=True):
-        """
-        集市
+        """集市
+
+        :param done: 是否执行真正的跑商（默认 true）
+        :return none:
         """
         start_time = TM.time()
 

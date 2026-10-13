@@ -47,20 +47,20 @@ def do_task(option: TaskOption):
 
     # game.Bianqiang.liehun(200)
     # game.Fuben.zhengzhan(21)
-    game.Zhanzheng.juyi(option.order_num)
+    # game.Zhanzheng.juyi(option.order_num)
 
     # game.Other.xiShuXing100(150)
     # game.Other.xiShuXing1()
     # game.Other.jingJiChang()
     # game.Other.youShanXunBao(250)
-    # 集市只能跑 2个， 启动程序耗时 1.8s,  59s的时候跑！
-    # game.Other.jiShi()
+    game.Other.jiShi()
     # game.Other.shengChenGang_chouJiang()
 
     # game.ZuDui.shenKun(0)
 
     # game.click_more(("天机秘籍", 670, 380), 120)
     # game.click_more(("背包-使用", 285, 218), 200)
+    # game.click_more(("逐鹿战场击杀宝箱-使用", 757, 295), 100)
 
     # game.Test.test_write(("请输入道具名称", 596, 120), 1000)
     # game.Test.test_log()
@@ -77,14 +77,14 @@ def more_task(lock, event):
     )
     global processList
     games = [
-        Game(133098, "2548918215"),
-        Game(264118, "2468659059"),
-        Game(329718, "3305194332"),
-        # Game(2427112, "111"),
-        # Game(1705358, "222"),
-        # Game(1312154, "333"),
-        # Game(2623636, "444"),
-        # Game(395482, "555"),
+        Game(329850, "2548918215"),
+        Game(394538, "2468659059"),
+        Game(263500, "3305194332"),
+        # Game(787848, "111"),
+        # Game(591254, "222"),
+        # Game(460644, "333"),
+        # Game(2295160, "444"),
+        # Game(591424, "555")
     ]
 
     # 只计算第一个实例的位置，其它实例共用位置
