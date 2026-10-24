@@ -47,13 +47,13 @@ def do_task(option: TaskOption):
 
     # game.Bianqiang.liehun(200)
     # game.Fuben.zhengzhan(21)
-    # game.Zhanzheng.juyi(option.order_num)
+    game.Zhanzheng.juyi(option.order_num)
 
     # game.Other.xiShuXing100(150)
     # game.Other.xiShuXing1()
     # game.Other.jingJiChang()
     # game.Other.youShanXunBao(250)
-    game.Other.jiShi()
+    # game.Other.jiShi()
     # game.Other.shengChenGang_chouJiang()
 
     # game.ZuDui.shenKun(0)
@@ -77,9 +77,9 @@ def more_task(lock, event):
     )
     global processList
     games = [
-        Game(329850, "2548918215"),
-        Game(394538, "2468659059"),
-        Game(263500, "3305194332"),
+        Game(131934, "2548918215"),
+        Game(132376, "2468659059"),
+        Game(132458, "3305194332"),
         # Game(787848, "111"),
         # Game(591254, "222"),
         # Game(460644, "333"),
