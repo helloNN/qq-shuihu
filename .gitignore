@@ -4,3 +4,4 @@ __pycache__
 logs/*.log
 src/config/[0-9]*.json
 src/config/cache.json
+.vs
