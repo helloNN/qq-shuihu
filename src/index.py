@@ -47,13 +47,14 @@ def do_task(option: TaskOption):
 
     # game.Bianqiang.liehun(200)
     # game.Fuben.zhengzhan(21)
-    game.Zhanzheng.juyi(option.order_num)
+    # game.Zhanzheng.juyi(option.order_num)
 
     # game.Other.xiShuXing100(150)
     # game.Other.xiShuXing1()
     # game.Other.jingJiChang()
     # game.Other.youShanXunBao(250)
     # game.Other.jiShi()
+    # game.Other.jiShi2()
     # game.Other.shengChenGang_chouJiang()
 
     # game.ZuDui.shenKun(0)

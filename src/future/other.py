@@ -91,6 +91,37 @@ class Other(Base):
             f"{self.qq}在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个, 耗时:{round(TM.time() - start_time, 2)}s"
         )
 
+    def jiShi2(self, max=True):
+        """集市只跑:泉州、临安
+
+        :param max: 是否执行泉州的跑商（默认 true）
+        :return none:
+        """
+        start_time = TM.time()
+
+        城市 = 6 if max else 5
+        商队 = 2
+        商品顺序 = 4 if max else 3
+
+        city = {1: "汴京", 2: "洛阳", 3: "扬州", 4: "苏州", 5: "临安", 6: "泉州"}
+
+        self.logger.info(f"在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个")
+
+        self.util.click((f"{city[城市]}", 200 + 103 * (城市 - 1), 100))
+        TM.sleep(0.2)
+        self.util.click((f"商品{商品顺序}", 470, 230 + 40 * (商品顺序 - 1)))
+        TM.sleep(0.15)
+        self.util.click((f"商队{商队}", 270 + 190 * (商队 - 1), 170))
+        TM.sleep(0.1)
+        self.util.click((f"货品数量最大", 688, 265))
+
+        TM.sleep(0.1)
+        self.util.click((f"开始跑商", 500, 415))
+
+        print(
+            f"{self.qq}在{city[城市]}用第{商队}商队进行跑商第{商品顺序}个, 耗时:{round(TM.time() - start_time, 2)}s"
+        )
+
     def jingJiChang(self, time=12):
         """竞技场
 
